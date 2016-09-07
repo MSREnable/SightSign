@@ -8,20 +8,14 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-using System.CodeDom.Compiler;
-using System.Configuration;
-using System.Diagnostics;
-using System.Drawing;
-using System.Runtime.CompilerServices;
-
 namespace eyeSign {
     
     
-    [CompilerGenerated()]
-    [GeneratedCode("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "14.0.0.0")]
-    internal sealed partial class Settings1 : ApplicationSettingsBase {
+    [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "14.0.0.0")]
+    internal sealed partial class Settings1 : global::System.Configuration.ApplicationSettingsBase {
         
-        private static Settings1 defaultInstance = ((Settings1)(Synchronized(new Settings1())));
+        private static Settings1 defaultInstance = ((Settings1)(global::System.Configuration.ApplicationSettingsBase.Synchronized(new Settings1())));
         
         public static Settings1 Default {
             get {
@@ -29,9 +23,9 @@ namespace eyeSign {
             }
         }
         
-        [UserScopedSetting()]
-        [DebuggerNonUserCode()]
-        [DefaultSettingValue("")]
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
         public string LoadedInkLocation {
             get {
                 return ((string)(this["LoadedInkLocation"]));
@@ -41,9 +35,9 @@ namespace eyeSign {
             }
         }
         
-        [UserScopedSetting()]
-        [DebuggerNonUserCode()]
-        [DefaultSettingValue("False")]
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
         public bool ShowDotWhenWriting {
             get {
                 return ((bool)(this["ShowDotWhenWriting"]));
@@ -53,9 +47,9 @@ namespace eyeSign {
             }
         }
         
-        [UserScopedSetting()]
-        [DebuggerNonUserCode()]
-        [DefaultSettingValue("False")]
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
         public bool ShowTranslucentInkWhenWriting {
             get {
                 return ((bool)(this["ShowTranslucentInkWhenWriting"]));
@@ -65,9 +59,9 @@ namespace eyeSign {
             }
         }
         
-        [UserScopedSetting()]
-        [DebuggerNonUserCode()]
-        [DefaultSettingValue("")]
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
         public string InkMatrix {
             get {
                 return ((string)(this["InkMatrix"]));
@@ -77,33 +71,33 @@ namespace eyeSign {
             }
         }
         
-        [UserScopedSetting()]
-        [DebuggerNonUserCode()]
-        [DefaultSettingValue("White")]
-        public Color InkColor {
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("White")]
+        public global::System.Drawing.Color InkColor {
             get {
-                return ((Color)(this["InkColor"]));
+                return ((global::System.Drawing.Color)(this["InkColor"]));
             }
             set {
                 this["InkColor"] = value;
             }
         }
         
-        [UserScopedSetting()]
-        [DebuggerNonUserCode()]
-        [DefaultSettingValue("64, 255, 255, 255")]
-        public Color FadedInkColor {
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("64, 255, 255, 255")]
+        public global::System.Drawing.Color FadedInkColor {
             get {
-                return ((Color)(this["FadedInkColor"]));
+                return ((global::System.Drawing.Color)(this["FadedInkColor"]));
             }
             set {
                 this["FadedInkColor"] = value;
             }
         }
         
-        [UserScopedSetting()]
-        [DebuggerNonUserCode()]
-        [DefaultSettingValue("10")]
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("10")]
         public double InkWidth {
             get {
                 return ((double)(this["InkWidth"]));
@@ -113,21 +107,21 @@ namespace eyeSign {
             }
         }
         
-        [UserScopedSetting()]
-        [DebuggerNonUserCode()]
-        [DefaultSettingValue("128, 254, 212, 42")]
-        public Color DotColor {
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("128, 254, 212, 42")]
+        public global::System.Drawing.Color DotColor {
             get {
-                return ((Color)(this["DotColor"]));
+                return ((global::System.Drawing.Color)(this["DotColor"]));
             }
             set {
                 this["DotColor"] = value;
             }
         }
         
-        [UserScopedSetting()]
-        [DebuggerNonUserCode()]
-        [DefaultSettingValue("100")]
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("100")]
         public double DotWidth {
             get {
                 return ((double)(this["DotWidth"]));
@@ -137,9 +131,9 @@ namespace eyeSign {
             }
         }
         
-        [UserScopedSetting()]
-        [DebuggerNonUserCode()]
-        [DefaultSettingValue("40")]
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("20")]
         public int AnimationInterval {
             get {
                 return ((int)(this["AnimationInterval"]));
@@ -149,9 +143,9 @@ namespace eyeSign {
             }
         }
         
-        [UserScopedSetting()]
-        [DebuggerNonUserCode()]
-        [DefaultSettingValue("100")]
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("100")]
         public int AnimationPointsOnFirstStroke {
             get {
                 return ((int)(this["AnimationPointsOnFirstStroke"]));
@@ -160,7 +154,6 @@ namespace eyeSign {
                 this["AnimationPointsOnFirstStroke"] = value;
             }
         }
-        
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -174,9 +167,9 @@ namespace eyeSign {
             }
         }
         
-        [UserScopedSetting()]
-        [DebuggerNonUserCode()]
-        [DefaultSettingValue("1.66")]
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("1.66")]
         public double RobotZShift {
             get {
                 return ((double)(this["RobotZShift"]));
@@ -186,9 +179,9 @@ namespace eyeSign {
             }
         }
         
-        [UserScopedSetting()]
-        [DebuggerNonUserCode()]
-        [DefaultSettingValue("0.35")]
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0.35")]
         public double RobotWorkspaceScale {
             get {
                 return ((double)(this["RobotWorkspaceScale"]));
@@ -198,9 +191,9 @@ namespace eyeSign {
             }
         }
         
-        [UserScopedSetting()]
-        [DebuggerNonUserCode()]
-        [DefaultSettingValue("True")]
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
         public bool RobotControl {
             get {
                 return ((bool)(this["RobotControl"]));
@@ -210,9 +203,9 @@ namespace eyeSign {
             }
         }
         
-        [UserScopedSetting()]
-        [DebuggerNonUserCode()]
-        [DefaultSettingValue("100")]
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("100")]
         public double DotDownWidth {
             get {
                 return ((double)(this["DotDownWidth"]));
@@ -222,69 +215,93 @@ namespace eyeSign {
             }
         }
         
-        [UserScopedSetting()]
-        [DebuggerNonUserCode()]
-        [DefaultSettingValue("254, 212, 42")]
-        public Color DotDownColor {
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("254, 212, 42")]
+        public global::System.Drawing.Color DotDownColor {
             get {
-                return ((Color)(this["DotDownColor"]));
+                return ((global::System.Drawing.Color)(this["DotDownColor"]));
             }
             set {
                 this["DotDownColor"] = value;
             }
         }
         
-        [UserScopedSetting()]
-        [DebuggerNonUserCode()]
-        [DefaultSettingValue("Black")]
-        public Color BackgroundColor {
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public double RobotRadiusBacklash {
             get {
-                return ((Color)(this["BackgroundColor"]));
+                return ((double)(this["RobotRadiusBacklash"]));
+            }
+            set {
+                this["RobotRadiusBacklash"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public double RobotThetaBacklash {
+            get {
+                return ((double)(this["RobotThetaBacklash"]));
+            }
+            set {
+                this["RobotThetaBacklash"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Black")]
+        public global::System.Drawing.Color BackgroundColor {
+            get {
+                return ((global::System.Drawing.Color)(this["BackgroundColor"]));
             }
             set {
                 this["BackgroundColor"] = value;
             }
         }
         
-        [UserScopedSetting()]
-        [DebuggerNonUserCode()]
-        [DefaultSettingValue("254, 212, 42")]
-        public Color ButtonBackgroundColor {
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("254, 212, 42")]
+        public global::System.Drawing.Color ButtonBackgroundColor {
             get {
-                return ((Color)(this["ButtonBackgroundColor"]));
+                return ((global::System.Drawing.Color)(this["ButtonBackgroundColor"]));
             }
             set {
                 this["ButtonBackgroundColor"] = value;
             }
         }
         
-        [UserScopedSetting()]
-        [DebuggerNonUserCode()]
-        [DefaultSettingValue("Black")]
-        public Color ButtonTextColor {
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Black")]
+        public global::System.Drawing.Color ButtonTextColor {
             get {
-                return ((Color)(this["ButtonTextColor"]));
+                return ((global::System.Drawing.Color)(this["ButtonTextColor"]));
             }
             set {
                 this["ButtonTextColor"] = value;
             }
         }
         
-        [UserScopedSetting()]
-        [DebuggerNonUserCode()]
-        [DefaultSettingValue("White")]
-        public Color ButtonBorderColor {
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("White")]
+        public global::System.Drawing.Color ButtonBorderColor {
             get {
-                return ((Color)(this["ButtonBorderColor"]));
+                return ((global::System.Drawing.Color)(this["ButtonBorderColor"]));
             }
             set {
                 this["ButtonBorderColor"] = value;
             }
         }
         
-        [UserScopedSetting()]
-        [DebuggerNonUserCode()]
-        [DefaultSettingValue("2")]
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("2")]
         public double ButtonBorderWidth {
             get {
                 return ((double)(this["ButtonBorderWidth"]));

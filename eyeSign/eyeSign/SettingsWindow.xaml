@@ -15,74 +15,8 @@
                         <Button Content="Load ink" Width="120" Click="LoadInkButton_Click" Margin="0 0 0 4" />
                         <Button Content="Save ink" Width="120" Click="SaveInkButton_Click" Margin="0 0 0 4" />
                         <Button Content="Clear ink" Width="120" Click="ClearInkButton_Click" Margin="0 0 0 30" />
-
-                        <Button x:Name="MoveInkLeft" Content="Move ink left" Width="120" 
-                                Click="MoveInkButton_Click" Margin="0 0 0 4" />
-                        <Button x:Name="MoveInkRight" Content="Move ink right" Width="120" 
-                                Click="MoveInkButton_Click" Margin="0 0 0 4" />
-                        <Button x:Name="MoveInkUp" Content="Move ink up" Width="120" 
-                                Click="MoveInkButton_Click" Margin="0 0 0 4" />
-                        <Button x:Name="MoveInkDown" Content="Move ink down" Width="120" 
-                                Click="MoveInkButton_Click" Margin="0 0 0 10" />
-                        <Button x:Name="ScaleInkUp" Content="Scale ink up" Width="120" 
-                                Click="ScaleInkButton_Click" Margin="0 0 0 4" />
-                        <Button x:Name="ScaleInkDown" Content="Scale ink down" Width="120" 
-                                Click="ScaleInkButton_Click" Margin="0 0 0 20" />
-
-                        <Button Content="Reset all" Width="120" Click="ResetAllButton_Click" Margin="0 0 0 20" />
-
-                    </StackPanel>
-                    <StackPanel Orientation="Vertical" HorizontalAlignment="Left" Margin="20">
-                        <TextBlock Text="Ink color (ARGB values)" />
-                        <TextBox x:Name="InkColorTextBox" TextChanged="InkColor_TextChanged" Margin="0 0 0 4" />
-
-                        <TextBlock Text="Ink width" />
-                        <TextBox x:Name="InkWidthTextBox" TextChanged="InkWidth_TextChanged" Margin="0 0 0 10" />
-
-                        <TextBlock Text="While writing:" Margin="0 0 0 2" />
-                        <TextBlock Text="Faded ink color" />
-                        <TextBox x:Name="FadedInkColorTextBox" TextChanged="FadedInkColor_TextChanged" Margin="0 0 0 4" />
-
-                        <TextBlock Text="Dot color (Up)" />
-                        <TextBox x:Name="DotColorTextBox" TextChanged="DotColor_TextChanged" Margin="0 0 0 4" />
-                        <TextBlock Text="Dot width (Up)" />
-                        <TextBox x:Name="DotWidthTextBox" TextChanged="DotWidth_TextChanged" Margin="0 0 0 6" />
-
-                        <TextBlock Text="Dot color (Down)" />
-                        <TextBox x:Name="DotDownColorTextBox" TextChanged="DotDownColor_TextChanged" Margin="0 0 0 4" />
-                        <TextBlock Text="Dot width (Down)" />
-                        <TextBox x:Name="DotDownWidthTextBox" TextChanged="DotDownWidth_TextChanged" Margin="0 0 0 6" />
                     </StackPanel>
 
-                    <StackPanel Orientation="Vertical" HorizontalAlignment="Left" Margin="20">
-                        <TextBlock Text="Background color" />
-                        <TextBox x:Name="BackgroundColorTextBox" TextChanged="BackgroundColor_TextChanged" Margin="0 0 0 4" />
-
-                        <TextBlock Text="Button background color" />
-                        <TextBox x:Name="ButtonBackgroundColorTextBox" TextChanged="ButtonBackgroundColor_TextChanged" Margin="0 0 0 4" />
-
-                        <TextBlock Text="Button text color" />
-                        <TextBox x:Name="ButtonTextColorTextBox" TextChanged="ButtonTextColor_TextChanged" Margin="0 0 0 4" />
-
-                        <TextBlock Text="Button border color" />
-                        <TextBox x:Name="ButtonBorderColorTextBox" TextChanged="ButtonBorderColor_TextChanged" Margin="0 0 0 4" />
-
-                        <TextBlock Text="Button border width" />
-                        <TextBox x:Name="ButtonBorderWidthTextBox" TextChanged="ButtonBorderWidth_TextChanged" Margin="0 0 0 10" />
-                    </StackPanel>
-
-                    <StackPanel Orientation="Vertical" HorizontalAlignment="Left" Margin="20">
-
-                        <Border BorderBrush="Black" BorderThickness="1" Margin="0 0 0 10">
-                            <StackPanel Margin="4">
-                                <TextBlock Text="Interval" />
-                                <TextBox x:Name="AnimationIntervalTextBox" TextChanged="AnimationInterval_TextChanged" Margin="0 0 0 6" />
-                                <TextBlock Text="Points on stroke" />
-                                <TextBox x:Name="AnimationPointsOnFirstStrokeTextBox" TextChanged="AnimationPointsOnFirstStroke_TextChanged" Margin="0 0 0 6" />
-                                <Button x:Name="ReloadInk" Content="Reload ink" Click="ReloadInk_Click"/>
-                            </StackPanel>
-                        </Border>
-                    </StackPanel>
                     <StackPanel Orientation="Vertical" HorizontalAlignment="Left" Margin="20">
                         <CheckBox 
                             x:Name="RobotControlCheckBox"
