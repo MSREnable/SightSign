@@ -145,7 +145,7 @@ namespace eyeSign {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("100")]
+        [global::System.Configuration.DefaultSettingValueAttribute("200")]
         public int AnimationPointsOnFirstStroke {
             get {
                 return ((int)(this["AnimationPointsOnFirstStroke"]));

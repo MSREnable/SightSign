@@ -147,6 +147,7 @@
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings1.Designer.cs</LastGenOutput>
     </None>
+    <None Include="Signature.isf" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

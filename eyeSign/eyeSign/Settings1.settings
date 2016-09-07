@@ -33,7 +33,7 @@
       <Value Profile="(Default)">20</Value>
     </Setting>
     <Setting Name="AnimationPointsOnFirstStroke" Type="System.Int32" Scope="User">
-      <Value Profile="(Default)">100</Value>
+      <Value Profile="(Default)">200</Value>
     </Setting>
     <Setting Name="RobotComPort" Type="System.String" Scope="User">
       <Value Profile="(Default)">com7</Value>

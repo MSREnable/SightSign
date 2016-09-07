@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Globalization;
 using System.IO;
@@ -9,8 +8,10 @@ using System.Windows.Ink;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Threading;
-using System.Xml.Linq;
 using Microsoft.EyeGaze.Mouse;
+using Microsoft.Win32;
+using System.Diagnostics;
+using System.Collections.Generic;
 
 namespace eyeSign
 {
@@ -23,6 +24,8 @@ namespace eyeSign
         private int _currentAnimatedPointIndex;
         private DispatcherTimer _dispatcherTimer;
         private bool _inTimer;
+
+        private bool _stampInProgress;
 
         private DispatcherTimer _buttonEnabledTimer;
 
@@ -42,10 +45,12 @@ namespace eyeSign
             var xScreen = SystemParameters.PrimaryScreenWidth;
             var yScreen = SystemParameters.PrimaryScreenHeight;
 
-            // Factors used to generate data to send to the robot.
-
-            RobotArm = new RobotArm(xScreen / 2.0, yScreen / 2.0, Math.Min(xScreen, yScreen) / 2.0, inkCanvas, canvas);
-            //            this.DataContext = this.RobotArm;
+            RobotArm = new RobotArm(
+                xScreen / 2.0, 
+                yScreen / 2.0, 
+                Math.Min(xScreen, yScreen) / 2.0, 
+                inkCanvas, 
+                canvas);
 
             _settings = new Settings(RobotArm);
             _settings.LoadSettings();
@@ -53,7 +58,6 @@ namespace eyeSign
             DataContext = _settings;
 
             Background = new SolidColorBrush(_settings.BackgroundColor);
-            // inkCanvas.Background = new SolidColorBrush(_settings.BackgroundColor);
 
             if (_settings.RobotControl)
             {
@@ -61,35 +65,57 @@ namespace eyeSign
                 RobotArm.Connect();
             }
 
-            LoadInk();
+            inkCanvas.DefaultDrawingAttributes.Color = _settings.InkColor;
+            inkCanvas.DefaultDrawingAttributes.Width = _settings.InkWidth;
+            inkCanvas.DefaultDrawingAttributes.Height = _settings.InkWidth;
 
-            ApplySettingsToInk();
+            LoadInkOnStartup();
 
             // Lift the arm.
             RobotArm.ArmDown(false);
         }
 
-        // Load the ink from the persisted filename.
-        internal void LoadInk()
+        private void LoadInkOnStartup()
         {
             var filename = Settings1.Default.LoadedInkLocation;
             if (string.IsNullOrEmpty(filename))
             {
-                var defaultFile = AppDomain.CurrentDomain.BaseDirectory + "Signature.xml";
-                if (File.Exists(defaultFile))
-                {
-                    filename = defaultFile;
-                }
+                filename = AppDomain.CurrentDomain.BaseDirectory + "Signature.isf";
             }
 
-            if (!string.IsNullOrEmpty(filename))
+            if (File.Exists(filename))
             {
-                LoadInkFromXmlFile(filename);
+                AddInkFromFile(filename);
+            }
+        }
+
+        private void AddInkFromFile(string filename)
+        {
+            if (string.IsNullOrEmpty(filename))
+            {
+                return;
+            }
+
+            // Remove any existing ink first.
+            inkCanvas.Strokes.Clear();
+
+            StrokeCollection strokeCollection = new StrokeCollection();
+
+            // Assume the file is valid and accessible.
+            var file = new FileStream(filename, FileMode.Open, FileAccess.Read);
+            strokeCollection = new StrokeCollection(file);
+            file.Close();
+
+            if (strokeCollection.Count > 0)
+            {
+                GenerateStrokesWithEvenlyDistributedPoints(strokeCollection);
+
+                ApplySettingsToInk();
             }
         }
 
         // Apply current settings to the current ink.
-        internal void ApplySettingsToInk()
+        private void ApplySettingsToInk()
         {
             if (inkCanvas.Strokes.Count > 0)
             {
@@ -98,7 +124,6 @@ namespace eyeSign
                     stroke.Transform(_settings.InkMatrix, false);
 
                     stroke.DrawingAttributes.Color = _settings.InkColor;
-
                     stroke.DrawingAttributes.Width = _settings.InkWidth;
                     stroke.DrawingAttributes.Height = _settings.InkWidth;
                 }
@@ -114,7 +139,84 @@ namespace eyeSign
             base.OnClosed(e);
         }
 
-        private bool _stampInProgress;
+        private void EditButton_Click(object sender, RoutedEventArgs e)
+        {
+            // Note that we're not interrupting the robot here.
+
+            ResetWriting();
+
+            if (StampButton.Visibility == Visibility.Visible)
+            {
+                StampButton.Visibility = Visibility.Collapsed;
+                WriteButton.Visibility = Visibility.Collapsed;
+
+                ClearButton.Visibility = Visibility.Visible;
+                SaveButton.Visibility = Visibility.Visible;
+                LoadButton.Visibility = Visibility.Visible;
+
+                inkCanvas.IsEnabled = true;
+            }
+            else
+            {
+                StampButton.Visibility = Visibility.Visible;
+                WriteButton.Visibility = Visibility.Visible;
+
+                ClearButton.Visibility = Visibility.Collapsed;
+                SaveButton.Visibility = Visibility.Collapsed;
+                LoadButton.Visibility = Visibility.Collapsed;
+
+                inkCanvas.IsEnabled = false;
+            }
+        }
+
+        private void ClearButton_Click(object sender, RoutedEventArgs e)
+        {
+            inkCanvas.Strokes.Clear();
+            inkCanvasAnimations.Strokes.Clear();
+        }
+
+        private void SaveButton_Click(object sender, RoutedEventArgs e)
+        {
+            var dlg = new SaveFileDialog();
+
+            dlg.DefaultExt = ".isf";
+            dlg.Filter = "ISF files (*.isf)|*.isf";
+
+            var result = dlg.ShowDialog();
+            if (result == true)
+            {
+                try
+                {
+                    var file = new FileStream(dlg.FileName, FileMode.Create, FileAccess.Write);
+                    inkCanvas.Strokes.Save(file);
+                    file.Close();
+
+                    Settings1.Default.LoadedInkLocation = dlg.FileName;
+                    Settings1.Default.Save();
+                }
+                catch (Exception)
+                {
+
+                }
+            }
+        }
+
+        private void LoadButton_Click(object sender, RoutedEventArgs e)
+        {
+            var dlg = new OpenFileDialog();
+
+            dlg.DefaultExt = ".isf";
+            dlg.Filter = "ISF files (*.isf)|*.isf";
+
+            var result = dlg.ShowDialog();
+            if (result == true)
+            {
+                AddInkFromFile(dlg.FileName);
+
+                Settings1.Default.LoadedInkLocation = dlg.FileName;
+                Settings1.Default.Save();
+            }
+        }
 
         // Send the entire signature to the robot, with no app visuals updated.
         private void StampButton_Click(object sender, RoutedEventArgs e)
@@ -201,7 +303,7 @@ namespace eyeSign
             ResetWriting();
         }
 
-        internal void ResetWriting()
+        private void ResetWriting()
         {
             _stampInProgress = false;
 
@@ -394,148 +496,63 @@ namespace eyeSign
             MoveDotAndRobotToStylusPoint(stylusPtNext);
         }
 
-        internal void LoadInkFromXmlFile(string filename)
+        private void GenerateStrokesWithEvenlyDistributedPoints(StrokeCollection strokeCollection)
         {
-            var collection = LoadXml(filename);
-
             double baseLength = 0;
 
-            for (var idx = 0; idx < collection.Count; ++idx)
+            for (var idx = 0; idx < strokeCollection.Count; ++idx)
             {
-                var pathGeometry = collection[idx];
-
-                var currentLength = GetLength(pathGeometry);
-
-                if (idx == 0)
+                StylusPointCollection existingStylusPoints = strokeCollection[idx].StylusPoints;
+                if (existingStylusPoints.Count > 0)
                 {
-                    baseLength = currentLength;
-                }
+                    Point start = existingStylusPoints[0].ToPoint();
 
-                // Each stroke will have the required number of points to keep the animation
-                // speed roughly the same for all strokes. Always have at least two points on
-                // the stroke.
-                var count = Math.Max(2, (int)((_settings.AnimationPointsOnFirstStroke * currentLength) / baseLength));
+                    List<LineSegment> segments = new List<LineSegment>();
 
-                var stylusPoints = new StylusPointCollection();
-
-                for (var i = 0; i < count; ++i)
-                {
-                    var distanceFraction = i / (double)count;
-
-                    Point pt;
-
-                    Point ptTangent;
-                    pathGeometry.GetPointAtFractionLength(
-                        distanceFraction, out pt, out ptTangent);
-
-                    stylusPoints.Add(new StylusPoint(pt.X, pt.Y));
-                }
-
-                if (stylusPoints.Count > 0)
-                {
-                    var stroke = new Stroke(stylusPoints);
-
-                    inkCanvas.Strokes.Add(stroke);
-                }
-            }
-
-            // If no matrix has been applied to the ink, center and scale it automatically.
-            if (Settings1.Default.InkMatrix == "")
-            {
-                CenterInkOnScreen();
-            }
-        }
-
-        private void CenterInkOnScreen()
-        {
-            // Get the bounding rect of the new ink.
-            if (inkCanvas.Strokes.Count > 0)
-            {
-                var boundingRect = new Rect();
-
-                foreach (var stroke in inkCanvas.Strokes)
-                {
-                    // TODO consider changing to tolerance comparison, since this is double
-                    if ((boundingRect.Size.Width == 0) &&
-                        (boundingRect.Size.Height == 0))
+                    for (int i = 1; i < existingStylusPoints.Count; i++)
                     {
-                        boundingRect = stroke.GetBounds();
+                        segments.Add(new LineSegment(existingStylusPoints[i].ToPoint(), true));
                     }
-                    else
+
+                    PathFigure figure = new PathFigure(start, segments, false /* Closed */ );
+                    PathGeometry pathGeometry = new PathGeometry();
+                    pathGeometry.Figures.Add(figure);
+
+                    var currentLength = GetLength(pathGeometry);
+
+                    if (idx == 0)
                     {
-                        boundingRect.Union(stroke.GetBounds());
+                        baseLength = currentLength;
+                    }
+
+                    // Each stroke will have the required number of points to keep the animation
+                    // speed roughly the same for all strokes. Always have at least two points on
+                    // the stroke.
+                    var count = Math.Max(2, (int)((_settings.AnimationPointsOnFirstStroke * currentLength) / baseLength));
+
+                    var stylusPoints = new StylusPointCollection();
+
+                    for (var i = 0; i < count; ++i)
+                    {
+                        var distanceFraction = i / (double)count;
+
+                        Point pt;
+                        Point ptTangent;
+                        pathGeometry.GetPointAtFractionLength(
+                            distanceFraction, out pt, out ptTangent);
+
+                        stylusPoints.Add(new StylusPoint(pt.X, pt.Y));
+                    }
+
+                    if (stylusPoints.Count > 0)
+                    {
+                        var stroke = new Stroke(stylusPoints);
+                        inkCanvas.Strokes.Add(stroke);
                     }
                 }
-
-                // TODO consider changing to tolerance comparison, since this is double
-                if ((boundingRect.Size.Width != 0) &&
-                    (boundingRect.Size.Height != 0))
-                {
-                    // The app has yet to be shown on the screen, and the dimensions of the window or
-                    // its elements are not yet available to us. So assume that the app will fill the
-                    // working area of the screen, and the should fill most of the app.
-
-                    // Buffer allows some gap between the ink and the edge of the app.
-                    const double buffer = 160.0;
-
-                    var screenWidth = SystemParameters.WorkArea.Width - buffer;
-                    var screenHeight = SystemParameters.WorkArea.Height - buffer;
-
-                    var scaleFactor = Math.Min(
-                        screenWidth / boundingRect.Width,
-                        screenHeight / boundingRect.Height);
-
-                    // Firtst scale up the ink.
-                    var matrix = new Matrix();
-
-                    matrix.Scale(scaleFactor, scaleFactor);
-
-                    // Now shift the ink to be more in the center of the screen.
-                    var centerPtOriginal = new Point(
-                        boundingRect.Left + (boundingRect.Width / 2),
-                        boundingRect.Top + (boundingRect.Height / 2));
-
-                    var centerPtScaled = new Point(
-                        centerPtOriginal.X * scaleFactor,
-                        centerPtOriginal.Y * scaleFactor);
-
-                    matrix.Translate(
-                        (screenWidth / 2.0) - centerPtScaled.X + (buffer / scaleFactor) - 80,
-                        (screenHeight / 2.0) - centerPtScaled.Y + (buffer / scaleFactor) - 20);
-
-                    _settings.InkMatrix = matrix;
-
-                    // By persisting the matrix here, it will be applied shortly.
-                    Settings1.Default.InkMatrix = _settings.InkMatrix.ToString();
-                    Settings1.Default.Save();
-                }
             }
         }
-
-        private static ObservableCollection<PathGeometry> LoadXml(string filename)
-        {
-            var xml = XDocument.Load(filename);
-
-            var collection = new ObservableCollection<PathGeometry>();
-
-            foreach (var e in xml.Descendants("Path"))
-            {
-                var xAttribute = e.Attribute("Data");
-                if (xAttribute != null)
-                {
-                    var path = xAttribute.Value;
-
-                    var geometry = Geometry.Parse(path);
-
-                    var pathGeometry = geometry.GetFlattenedPathGeometry();
-
-                    collection.Add(pathGeometry);
-                }
-            }
-
-            return collection;
-        }
-
+        
         public static double GetLength(PathGeometry pathGeometry)
         {
             var length = 0.0;
@@ -546,12 +563,29 @@ namespace eyeSign
 
                 foreach (var pathSegment in pf.Segments)
                 {
-                    var seg = (PolyLineSegment) pathSegment;
-                    foreach (var point in seg.Points)
+                    LineSegment lineSegment = pathSegment as LineSegment;
+                    if (lineSegment != null)
                     {
-                        length += Distance(start, point);
+                        length += Distance(start, lineSegment.Point);
 
-                        start = point;
+                        start = lineSegment.Point;
+                    }
+                    else
+                    {
+                        PolyLineSegment polylineSegment = pathSegment as PolyLineSegment;
+                        if (polylineSegment != null)
+                        {
+                            foreach (var point in polylineSegment.Points)
+                            {
+                                length += Distance(start, point);
+
+                                start = point;
+                            }
+                        }
+                        else
+                        {
+                            Debug.WriteLine("Unexpected data - Segment is neither LineSegment or PolylineSegment.");
+                        }
                     }
                 }
             }

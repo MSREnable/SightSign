@@ -11,13 +11,6 @@
             <Border BorderThickness="1" BorderBrush="Black" Padding="10">
                 <StackPanel Orientation="Horizontal">
                     <StackPanel Orientation="Vertical" HorizontalAlignment="Left" Margin="20">
-                        <Button Content="Load XML" Width="120" Click="ImportXMLButton_Click" Margin="0 0 0 4" />
-                        <Button Content="Load ink" Width="120" Click="LoadInkButton_Click" Margin="0 0 0 4" />
-                        <Button Content="Save ink" Width="120" Click="SaveInkButton_Click" Margin="0 0 0 4" />
-                        <Button Content="Clear ink" Width="120" Click="ClearInkButton_Click" Margin="0 0 0 30" />
-                    </StackPanel>
-
-                    <StackPanel Orientation="Vertical" HorizontalAlignment="Left" Margin="20">
                         <CheckBox 
                             x:Name="RobotControlCheckBox"
                             Width="120"

@@ -69,20 +69,58 @@
             <ColumnDefinition Width="auto" />
             <ColumnDefinition />
         </Grid.ColumnDefinitions>
-        <StackPanel Grid.Column="0" Orientation="Vertical" HorizontalAlignment="Left"
-                    Background="Transparent"
-                    MouseRightButtonUp="StackPanel_MouseRightButtonUp">
-            <Button 
+        <Grid Grid.Column="0" HorizontalAlignment="Left"
+            Background="Transparent"
+            MouseRightButtonUp="StackPanel_MouseRightButtonUp">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="auto" />
+                <RowDefinition />
+                <RowDefinition Height="auto" />
+            </Grid.RowDefinitions>
+
+            <Button Grid.Row="0"
+                x:Name="StampButton"
                 Style="{StaticResource SimpleButton}"
                 Foreground="{Binding ButtonTextColor,
                     Converter={StaticResource ColorToSolidBrushConverter}}"
                 Content="Stamp" Click="StampButton_Click" Margin="0 0 0 40" />
-            <Button 
+            <Button Grid.Row="1" 
+                x:Name="WriteButton"
                 Style="{StaticResource SimpleButton}"
                 Foreground="{Binding ButtonTextColor,
                     Converter={StaticResource ColorToSolidBrushConverter}}"
-                Content="Write" Click="WriteButton_Click" Margin="0 0 0 40" />
-        </StackPanel>
+                Content="Write" Click="WriteButton_Click" />
+
+            <Button Grid.Row="0"
+                x:Name="ClearButton"
+                Visibility="Collapsed"
+                Style="{StaticResource SimpleButton}"
+                Foreground="{Binding ButtonTextColor,
+                    Converter={StaticResource ColorToSolidBrushConverter}}"
+                Content="Clear" Click="ClearButton_Click" Margin="0 0 0 20" />
+            <Button Grid.Row="1" 
+                x:Name="SaveButton"                
+                Visibility="Collapsed"
+                Style="{StaticResource SimpleButton}"
+                Foreground="{Binding ButtonTextColor,
+                    Converter={StaticResource ColorToSolidBrushConverter}}"
+                Content="Save" Click="SaveButton_Click" Margin="0 0 0 20" />
+            <Button Grid.Row="2"
+                x:Name="LoadButton"
+                Visibility="Collapsed"
+                Style="{StaticResource SimpleButton}"
+                Foreground="{Binding ButtonTextColor,
+                    Converter={StaticResource ColorToSolidBrushConverter}}"
+                Content="Load" Click="LoadButton_Click"/>
+
+            <Button Grid.Row="4" 
+                Style="{StaticResource SimpleButton}"
+                Foreground="{Binding ButtonTextColor,
+                    Converter={StaticResource ColorToSolidBrushConverter}}"
+                Content="Edit" Click="EditButton_Click" Margin="0 0 0 20" />
+        </Grid>
 
         <Grid x:Name="canvas" Grid.Column="1">
             <InkCanvas 
