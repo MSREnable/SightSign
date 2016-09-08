@@ -13,6 +13,7 @@
 
     <Window.Resources>
 
+        <local:ArmConnectedToContentConverter x:Key="ArmConnectedToContentConverter"/>
         <local:ArmStateToDotFillConverter x:Key="ArmStateToDotFillConverter"/>
         <local:ArmStateToDotWidthConverter x:Key="ArmStateToDotWidthConverter"/>
         <local:ColorToSolidBrushConverter x:Key="ColorToSolidBrushConverter"/>
@@ -68,10 +69,10 @@
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="auto" />
             <ColumnDefinition />
+            <ColumnDefinition Width="auto" />
         </Grid.ColumnDefinitions>
         <Grid Grid.Column="0" HorizontalAlignment="Left"
-            Background="Transparent"
-            MouseRightButtonUp="StackPanel_MouseRightButtonUp">
+            Background="Transparent">
             <Grid.RowDefinitions>
                 <RowDefinition Height="auto" />
                 <RowDefinition Height="auto" />
@@ -91,7 +92,7 @@
                 Style="{StaticResource SimpleButton}"
                 Foreground="{Binding ButtonTextColor,
                     Converter={StaticResource ColorToSolidBrushConverter}}"
-                Content="Write" Click="WriteButton_Click" />
+                Content="Write" Click="WriteButton_Click" Margin="0 0 0 40" />
 
             <Button Grid.Row="0"
                 x:Name="ClearButton"
@@ -113,16 +114,17 @@
                 Style="{StaticResource SimpleButton}"
                 Foreground="{Binding ButtonTextColor,
                     Converter={StaticResource ColorToSolidBrushConverter}}"
-                Content="Load" Click="LoadButton_Click"/>
+                Content="Load" Click="LoadButton_Click" Margin="0 0 0 20" />
 
             <Button Grid.Row="4" 
+                x:Name="EditButton"
                 Style="{StaticResource SimpleButton}"
                 Foreground="{Binding ButtonTextColor,
                     Converter={StaticResource ColorToSolidBrushConverter}}"
-                Content="Edit" Click="EditButton_Click" Margin="0 0 0 20" />
+                Content="Edit" Click="EditButton_Click" />
         </Grid>
 
-        <Grid x:Name="canvas" Grid.Column="1">
+        <Grid x:Name="canvas" Grid.Column="1" Grid.ColumnSpan="2">
             <InkCanvas 
                 AutomationProperties.Name="Background ink canvas"
                 x:Name="inkCanvas" 
@@ -195,6 +197,22 @@
                     </Style>
                 </Button.Style>
             </Button>
+        </Grid>
+        <Grid Grid.Column="2">
+            <Grid.RowDefinitions>
+                <RowDefinition />
+                <RowDefinition Height="auto" />
+            </Grid.RowDefinitions>
+            <Button Grid.Row="1"
+                x:Name="SettingsButton"
+                Style="{StaticResource SimpleButton}"
+                Foreground="{Binding ButtonTextColor,
+                    Converter={StaticResource ColorToSolidBrushConverter}}"
+                Content="{Binding Arm.Connected,
+                    Converter={StaticResource ArmConnectedToContentConverter}}"
+                FontFamily="Segoe MDL2 Assets"
+                FontSize="48"
+                Click="SettingsButton_Click" />
         </Grid>
     </Grid>
 </Window>

@@ -147,6 +147,8 @@ namespace eyeSign
 
             if (StampButton.Visibility == Visibility.Visible)
             {
+                EditButton.Content = "Done";
+
                 StampButton.Visibility = Visibility.Collapsed;
                 WriteButton.Visibility = Visibility.Collapsed;
 
@@ -158,6 +160,8 @@ namespace eyeSign
             }
             else
             {
+                EditButton.Content = "Edit";
+
                 StampButton.Visibility = Visibility.Visible;
                 WriteButton.Visibility = Visibility.Visible;
 
@@ -167,6 +171,11 @@ namespace eyeSign
 
                 inkCanvas.IsEnabled = false;
             }
+        }
+
+        private void SettingsButton_Click(object sender, RoutedEventArgs e)
+        {
+            ShowSettingsWindow();
         }
 
         private void ClearButton_Click(object sender, RoutedEventArgs e)
@@ -598,18 +607,10 @@ namespace eyeSign
             return Math.Sqrt(Math.Pow(p1.X - p2.X, 2) + Math.Pow(p1.Y - p2.Y, 2));
         }
 
-        private void StackPanel_MouseRightButtonUp(object sender, MouseButtonEventArgs e)
-        {
-            ShowSettingsWindow();
-        }
-
         private void Window_KeyDown(object sender, KeyEventArgs e)
         {
             switch (e.Key)
             {
-                case Key.S: // settings
-                    ShowSettingsWindow();
-                    break;
                 case Key.D: // arm down
                     RobotArm.ArmDown(true);
                     break;
@@ -740,6 +741,21 @@ namespace eyeSign
 
             return new SolidColorBrush(Color.FromArgb(
                 color.A, color.R, color.G, color.B));
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            return null;
+        }
+    }
+
+    public class ArmConnectedToContentConverter : IValueConverter
+    {
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            var armConnected = (bool)value;
+
+            return "\uE99A" + (armConnected ? "\uE10B" : "\uE10A");
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

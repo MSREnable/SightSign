@@ -5,26 +5,49 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:eyeSign"
         mc:Ignorable="d"
-        Title="Settings Window">
+        Title="Settings"
+        Width="260" 
+        Height="400"
+        WindowStartupLocation="CenterOwner"
+        ResizeMode="NoResize">
     <Grid>
-        <ScrollViewer x:Name="SettingsViewer">
-            <Border BorderThickness="1" BorderBrush="Black" Padding="10">
-                <StackPanel Orientation="Horizontal">
-                    <StackPanel Orientation="Vertical" HorizontalAlignment="Left" Margin="20">
-                        <CheckBox 
-                            x:Name="RobotControlCheckBox"
-                            Width="120"
-                            HorizontalAlignment="Left"
-                            Content="Talk to the robot" 
-                            Checked="RobotControlCheckBox_CheckedStateChanged"
-                            Unchecked="RobotControlCheckBox_CheckedStateChanged"
-                            Margin="0 0 0 10" />
-                        <Button x:Name="ZUpButton" Content="Z Up" Width="120" Margin="0 20 0 0" Click="ZUpButton_Click" />
-                        <Button x:Name="ZDownButton" Content="Z Down" Width="120" Margin="0 6 0 0" Click="ZDownButton_Click" />
-                        <Button x:Name="InkBounds" Content="Show corners" Width="120" Margin="0 6 0 0" Click="ShowCornersButton_Click" />
-                    </StackPanel>
-                </StackPanel>
-            </Border>
-        </ScrollViewer>
+        <Border BorderThickness="1" BorderBrush="Black" Padding="10">
+            <StackPanel Orientation="Vertical" HorizontalAlignment="Center" Margin="40">
+                <CheckBox 
+                    x:Name="RobotControlCheckBox"
+                    Width="120"
+                    HorizontalAlignment="Left"
+                    Content="Talk to the robot" 
+                    Checked="RobotControlCheckBox_CheckedStateChanged"
+                    Unchecked="RobotControlCheckBox_CheckedStateChanged"
+                    Margin="0 0 0 10" />
+                <Button 
+                    x:Name="ZUpButton" 
+                    Content="Z Up" 
+                    Width="120" 
+                    Height="30"
+                    Margin="0 20 0 0" 
+                    Click="ZUpButton_Click" />
+                <Button 
+                    x:Name="ZDownButton" 
+                    Content="Z Down" 
+                    Width="120" 
+                    Height="30"
+                    Margin="0 6 0 20" 
+                    Click="ZDownButton_Click" />
+                <Button 
+                    x:Name="InkBounds" 
+                    Content="Show corners" 
+                    Width="120" 
+                    Height="30"
+                    Margin="0 6 0 40" 
+                    Click="ShowCornersButton_Click" />
+                <Button 
+                    HorizontalAlignment="Right" 
+                    Content="Close" 
+                    Padding="20 4 20 4" 
+                    Click="CloseButton_Click" />
+            </StackPanel>
+        </Border>
     </Grid>
 </Window>

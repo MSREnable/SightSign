@@ -67,10 +67,12 @@ namespace eyeSign
             {
                 Arm.Connect();
                 Arm.ZeroG(false);
+
+                this.Connected = true;
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Could not connect to robot ({ex.Message})", "Robot Not Connected");
+                Debug.WriteLine("Could not connect to robot " + ex.Message);
             }
         }
 
@@ -82,11 +84,31 @@ namespace eyeSign
             // Now disconnect the arm.
             Arm.ZeroG(true);
             Arm.Disconnect();
+
+            this.Connected = false;
         }
 
         public void Close()
         {
             Disconnect();
+        }
+
+        private bool _connected;
+        public bool Connected
+        {
+            get
+            {
+                return _connected;
+            }
+
+            set
+            {
+                if (_connected != value)
+                {
+                    _connected = value;
+                    OnPropertyChanged("Connected");
+                }
+            }
         }
 
         private bool _armIsDown;

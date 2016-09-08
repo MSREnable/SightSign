@@ -77,6 +77,11 @@ namespace eyeSign
             Settings1.Default.Save();
         }
 
+        private void CloseButton_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+        }
+
         private void ZUpButton_Click(object sender, RoutedEventArgs e)
         {
             _mainWindow.RobotArm.ArmDown(true);
