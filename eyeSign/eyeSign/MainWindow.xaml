@@ -14,6 +14,7 @@
     <Window.Resources>
 
         <local:ArmConnectedToContentConverter x:Key="ArmConnectedToContentConverter"/>
+        <local:ArmConnectedToHelpTextConverter x:Key="ArmConnectedToHelpTextConverter"/>
         <local:ArmStateToDotFillConverter x:Key="ArmStateToDotFillConverter"/>
         <local:ArmStateToDotWidthConverter x:Key="ArmStateToDotWidthConverter"/>
         <local:ColorToSolidBrushConverter x:Key="ColorToSolidBrushConverter"/>
@@ -205,6 +206,9 @@
             </Grid.RowDefinitions>
             <Button Grid.Row="1"
                 x:Name="SettingsButton"
+                AutomationProperties.Name="Settings"
+                AutomationProperties.HelpText="{Binding Arm.Connected,
+                    Converter={StaticResource ArmConnectedToHelpTextConverter}}"
                 Style="{StaticResource SimpleButton}"
                 Foreground="{Binding ButtonTextColor,
                     Converter={StaticResource ColorToSolidBrushConverter}}"

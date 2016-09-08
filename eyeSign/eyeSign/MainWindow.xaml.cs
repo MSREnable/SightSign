@@ -764,6 +764,21 @@ namespace eyeSign
         }
     }
 
+    public class ArmConnectedToHelpTextConverter : IValueConverter
+    {
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            var armConnected = (bool)value;
+
+            return "Robot " + (armConnected ? "connected" : "disconnected");
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            return null;
+        }
+    }
+
     public class ArmStateToDotWidthConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
