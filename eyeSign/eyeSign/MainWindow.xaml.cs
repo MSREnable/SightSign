@@ -345,6 +345,9 @@ namespace eyeSign
                 dotTranslateTransform.X = pt.X - (inkCanvas.ActualWidth / 2);
                 dotTranslateTransform.Y = pt.Y - (inkCanvas.ActualHeight / 2);
             }
+
+            // Send the point to the robot too.
+            RobotArm.Move(pt);
         }
 
         private void AddFirstPointToNewStroke(StylusPoint pt)

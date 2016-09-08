@@ -133,58 +133,6 @@ namespace eyeSign
         // TODO: Should this affect the attempt to connect and disconnect to the robot?
         public bool Enabled { get; set; }
 
-        public void SendFullSignature()
-        {
-            if (!Enabled)
-            {
-                return;
-            }
-
-            // Beware of an inkless canvas.
-            if (_inkCanvas.Strokes.Count == 0)
-            {
-                return;
-            }
-
-            // Send each stroke in turn.
-            foreach (var stroke in _inkCanvas.Strokes)
-            {
-                SendStroke(stroke);
-            }
-        }
-
-        public void SendStroke(Stroke stroke)
-        {
-            if (!Enabled)
-            {
-                return;
-            }
-
-            // Beware of pointless strokes.
-            if (stroke.StylusPoints.Count == 0)
-            {
-                return;
-            }
-
-            // Pen up.
-            ArmDown(false);
-
-            // Move to first point on the stroke.
-            Move(stroke.StylusPoints[0].ToPoint());
-
-            // Pen down.
-            ArmDown(true);
-
-            // Write the entire stroke.
-            for (var i = 0; i < stroke.StylusPoints.Count; ++i)
-            {
-                Move(stroke.StylusPoints[i].ToPoint());
-            }
-
-            // Pen up.
-            ArmDown(false);
-        }
-
         public void ArmDown(bool down)
         {
             Debug.WriteLine("Arm is " + (down ? "down" : "up"));
