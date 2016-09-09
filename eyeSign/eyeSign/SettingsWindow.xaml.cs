@@ -47,13 +47,11 @@ namespace eyeSign
 
             if (_settings.RobotControl)
             {
-                _robotArm.Enabled = true;
                 _robotArm.Connect();
             }
             else
             {
                 _robotArm.Disconnect(); // must disconnect *before* disabling
-                _robotArm.Enabled = false;
             }
 
             Settings1.Default.RobotControl = _settings.RobotControl;
