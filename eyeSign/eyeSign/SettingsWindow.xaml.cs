@@ -1,42 +1,31 @@
-﻿using System;
-using System.IO;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Ink;
-using Microsoft.Win32;
+﻿using System.Windows;
 
 namespace eyeSign
 {
-    /// <summary>
-    /// Interaction logic for SettingsWindow.xaml
-    /// </summary>
+    // A window showing the configurable settings in the app. 
     public partial class SettingsWindow : Window
     {
         private MainWindow _mainWindow;
         private Settings _settings;
         private RobotArm _robotArm;
-        private InkCanvas _inkCanvas;
-        private InkCanvas _inkCanvasAnimations;
 
         private bool _windowIntialized;
 
         public SettingsWindow(
             MainWindow mainWindow,
             Settings settings, 
-            RobotArm robotArm, 
-            InkCanvas inkCanvas,
-            InkCanvas inkCanvasAnimations)
+            RobotArm robotArm)
         {
             _mainWindow = mainWindow;
             _settings = settings;
             _robotArm = robotArm;
-            _inkCanvas = inkCanvas;
-            _inkCanvasAnimations = inkCanvasAnimations;
 
             InitializeComponent();
 
-            LoadSettings();
+            RobotControlCheckBox.IsChecked = _settings.RobotControl;
 
+            // Explicitly disable the owning window here, to prevent any interaction 
+            // through eyegaze input while the Settings window is visible.
             Loaded += (s, e) => Owner.IsEnabled = false;
             Unloaded += (s, e) =>
             {
@@ -45,12 +34,6 @@ namespace eyeSign
             };
 
             _windowIntialized = true;
-        }
-
-        // Load all persisted settings.
-        private void LoadSettings()
-        {
-            RobotControlCheckBox.IsChecked = _settings.RobotControl;
         }
 
         private void RobotControlCheckBox_CheckedStateChanged(object sender, RoutedEventArgs e)
@@ -79,7 +62,7 @@ namespace eyeSign
 
         private void CloseButton_Click(object sender, RoutedEventArgs e)
         {
-            this.Close();
+            Close();
         }
 
         private void ZUpButton_Click(object sender, RoutedEventArgs e)
@@ -96,6 +79,7 @@ namespace eyeSign
 
         private void ShowCornersButton_Click(object sender, RoutedEventArgs e)
         {
+            // Find the bounding rectangle of all the strokes in the ink.
             var countStrokes = _mainWindow.inkCanvas.Strokes.Count;
 
             var bounds = new Rect();
@@ -112,6 +96,7 @@ namespace eyeSign
                 }
             }
 
+            // Now draw dots at the four corners of the bounding rect.
             if (!bounds.IsEmpty)
             {
                 _mainWindow.RobotArm.ArmDown(false);
@@ -130,6 +115,7 @@ namespace eyeSign
                 _robotArm.Move(new Point(bounds.X, bounds.Y + bounds.Height));
                 _mainWindow.RobotArm.ArmDown(true);
 
+                // Leave the robot arm up.
                 _mainWindow.RobotArm.ArmDown(false);
             }
         }

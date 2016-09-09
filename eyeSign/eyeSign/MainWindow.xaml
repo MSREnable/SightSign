@@ -5,8 +5,10 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:local="clr-namespace:eyeSign"
     mc:Ignorable="d"
+    Title="Autograph" 
+    Height="480" 
+    Width="640"
     KeyDown="Window_KeyDown"
-    Title="Autograph" Height="480" Width="640"
     MouseWheel="Window_MouseWheel"
     Loaded="MainWindow_OnLoaded"
     Closing="MainWindow_OnClosing">
@@ -19,6 +21,7 @@
         <local:ArmStateToDotWidthConverter x:Key="ArmStateToDotWidthConverter"/>
         <local:ColorToSolidBrushConverter x:Key="ColorToSolidBrushConverter"/>
 
+        <!-- Style for the big round buttons shown in the app. -->
         <Style x:Key="SimpleButton" TargetType="{x:Type Button}" BasedOn="{x:Null}">
             <Setter Property="FontSize" Value="32"/>
             <Setter Property="Template">
@@ -26,7 +29,8 @@
                     <ControlTemplate TargetType="{x:Type Button}">
                         <Grid x:Name="Grid">
                             <Ellipse 
-                                Width="120" Height="120" 
+                                Width="120" 
+                                Height="120" 
                                 Fill="{Binding ButtonBackgroundColor,
                                     Converter={StaticResource ColorToSolidBrushConverter}}"
                                 Stroke="{Binding ButtonBorderColor,
@@ -47,7 +51,8 @@
                             <ControlTemplate TargetType="{x:Type Button}">
                                 <Grid x:Name="Grid">
                                     <Ellipse 
-                                        Width="120" Height="120" 
+                                        Width="120" 
+                                        Height="120" 
                                         Fill="{Binding ButtonBackgroundColor,
                                             Converter={StaticResource ColorToSolidBrushConverter}}"
                                         Stroke="{Binding ButtonBorderColor,
@@ -66,13 +71,16 @@
         </Style>
     </Window.Resources>
 
-    <Grid x:Name="OuterGrid" Margin="40">
+    <!-- The main app area. -->
+    <Grid Margin="40">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="auto" />
             <ColumnDefinition />
             <ColumnDefinition Width="auto" />
         </Grid.ColumnDefinitions>
-        <Grid Grid.Column="0" HorizontalAlignment="Left"
+        
+        <!-- The column of big round buttons down the left side of the app. -->
+        <Grid HorizontalAlignment="Left"
             Background="Transparent">
             <Grid.RowDefinitions>
                 <RowDefinition Height="auto" />
@@ -82,8 +90,8 @@
                 <RowDefinition Height="auto" />
             </Grid.RowDefinitions>
 
-            <Button Grid.Row="0"
-                x:Name="StampButton"
+            <!-- The Write and Stamp buttons. -->
+            <Button x:Name="StampButton"
                 Style="{StaticResource SimpleButton}"
                 Foreground="{Binding ButtonTextColor,
                     Converter={StaticResource ColorToSolidBrushConverter}}"
@@ -95,6 +103,7 @@
                     Converter={StaticResource ColorToSolidBrushConverter}}"
                 Content="Write" Click="WriteButton_Click" Margin="0 0 0 40" />
 
+            <!-- The inking-related Clear, Save and Load buttons. -->
             <Button Grid.Row="0"
                 x:Name="ClearButton"
                 Visibility="Collapsed"
@@ -117,6 +126,7 @@
                     Converter={StaticResource ColorToSolidBrushConverter}}"
                 Content="Load" Click="LoadButton_Click" Margin="0 0 0 20" />
 
+            <!-- The Edit/Done button. -->
             <Button Grid.Row="4" 
                 x:Name="EditButton"
                 Style="{StaticResource SimpleButton}"
@@ -125,12 +135,17 @@
                 Content="Edit" Click="EditButton_Click" />
         </Grid>
 
+        <!-- The main area showing the ink and animating dot. -->
         <Grid x:Name="canvas" Grid.Column="1" Grid.ColumnSpan="2">
+            
+            <!-- The InkCanvas showing the default ink of the ink drawn by the user. -->
             <InkCanvas 
                 AutomationProperties.Name="Background ink canvas"
                 x:Name="inkCanvas" 
                 Background="Transparent"
                 IsEnabled="False" />
+            
+            <!-- The InkCanvas showing the ink as it's being traced out. -->
             <InkCanvas 
                 AutomationProperties.Name="Tracing ink canvas"
                 x:Name="inkCanvasAnimations" 
@@ -138,6 +153,8 @@
                 IsHitTestVisible="True"
                 IsEnabled="False" 
                 Visibility="Collapsed" />
+
+            <!-- The animating dot which runs along the ink. -->
             <Button 
                 x:Name="dot"
                 AutomationProperties.Name="Dot"
@@ -151,8 +168,7 @@
                 Click="Dot_OnClick">
 
                 <Button.RenderTransform>
-                    <TranslateTransform 
-                        x:Name="dotTranslateTransform"/>
+                    <TranslateTransform x:Name="dotTranslateTransform"/>
                 </Button.RenderTransform>
 
                 <Button.Style>
@@ -199,6 +215,8 @@
                 </Button.Style>
             </Button>
         </Grid>
+        
+        <!-- A grid column showing the Settings button at the right of the window. -->
         <Grid Grid.Column="2">
             <Grid.RowDefinitions>
                 <RowDefinition />

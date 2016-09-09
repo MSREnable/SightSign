@@ -54,10 +54,7 @@ namespace eyeSign
             _inkCanvas = inkCanvas;
             _canvas = canvas;
 
-            if (Enabled)
-            {
-                Connect();
-            }
+            Connect();
         }
 
         public void Connect()
@@ -129,10 +126,6 @@ namespace eyeSign
             }
         }
 
-        // If the arm's Enabled state is false, then all calls into the RobotArm class are no-ops.
-        // TODO: Should this affect the attempt to connect and disconnect to the robot?
-        public bool Enabled { get; set; }
-
         public void ArmDown(bool down)
         {
             Debug.WriteLine("Arm is " + (down ? "down" : "up"));
@@ -140,11 +133,6 @@ namespace eyeSign
             // Set the ArmIsDown property regardless of whether the app is currently controlling
             // the robot, in order for the dot visual bound to the property to be updated.
             ArmIsDown = down;
-
-            if (!Enabled)
-            {
-                return;
-            }
 
             Move(LastPoint);
         }
@@ -171,11 +159,6 @@ namespace eyeSign
 
         public void Move(Point pt)
         {
-            if (!Enabled)
-            {
-                return;
-            }
-
             LastPoint = pt;
             var scale = Settings1.Default.RobotWorkspaceScale;
             var x = ((pt.Y - _yShift) / _minDimensionHalf * scale * ScalingFactorX);

@@ -53,7 +53,6 @@ namespace eyeSign
                 canvas);
 
             _settings = new Settings(RobotArm);
-            _settings.LoadSettings();
 
             DataContext = _settings;
 
@@ -121,8 +120,6 @@ namespace eyeSign
             {
                 foreach (var stroke in inkCanvas.Strokes)
                 {
-                    stroke.Transform(_settings.InkMatrix, false);
-
                     stroke.DrawingAttributes.Color = _settings.InkColor;
                     stroke.DrawingAttributes.Width = _settings.InkWidth;
                     stroke.DrawingAttributes.Height = _settings.InkWidth;
@@ -631,7 +628,8 @@ namespace eyeSign
 
         private void ShowSettingsWindow()
         {
-            var settingsWindow = new SettingsWindow(this, _settings, RobotArm, inkCanvas, inkCanvasAnimations);
+            var settingsWindow = new SettingsWindow(this, _settings, RobotArm);
+
             settingsWindow.Owner = this;
             settingsWindow.ShowDialog();
         }
