@@ -22,8 +22,6 @@ namespace eyeSign
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
-        private readonly Grid _canvas;
-        private readonly InkCanvas _inkCanvas;
         private readonly double _xShift;
         private readonly double _yShift;
         private double _zShift = Settings1.Default.RobotZShift;
@@ -51,8 +49,6 @@ namespace eyeSign
             _xShift = xShift;
             _yShift = yShift;
             _minDimensionHalf = minDimensionHalf;
-            _inkCanvas = inkCanvas;
-            _canvas = canvas;
 
             Connect();
         }
