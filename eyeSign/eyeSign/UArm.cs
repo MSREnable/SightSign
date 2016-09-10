@@ -8,8 +8,8 @@ namespace eyeSign
     public class UArm
     {
         private readonly string _port;
-        private ReflectaClient _reflecta = null;
-        private Compiler _compiler = new Compiler();
+        private ReflectaClient _reflecta;
+        private readonly Compiler _compiler = new Compiler();
 
         public UArm(string port)
         {
@@ -18,7 +18,7 @@ namespace eyeSign
 
         private void Exec(int wait, string brief)
         {
-            Console.WriteLine($"EXEC BRIEF: {brief} ({wait})");
+            Console.WriteLine($@"EXEC BRIEF: {brief} ({wait})");
             var compiled = _compiler.EagerCompile(brief);
             try
             {
@@ -29,7 +29,7 @@ namespace eyeSign
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"Communication error: {ex.Message}");
+                Console.WriteLine($@"Communication error: {ex.Message}");
             }
             Thread.Sleep(wait);
         }
@@ -37,7 +37,7 @@ namespace eyeSign
         public void Connect()
         {
             _reflecta = new ReflectaClient(_port);
-            _reflecta.ErrorReceived += (_, e) => Console.WriteLine($"Error: {e.Message}");
+            _reflecta.ErrorReceived += (_, e) => Console.WriteLine($@"Error: {e.Message}");
             _compiler.Reset();
             _compiler.Instruction("attach", 103);
             _compiler.Instruction("detach", 104);

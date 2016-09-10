@@ -1,15 +1,8 @@
 using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
-using System.IO;
-using System.Threading;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Ink;
-using System.Windows.Media;
-using System.Windows.Shapes;
-using Microsoft.Robotics.UArm;
 
 namespace eyeSign
 {
@@ -63,7 +56,7 @@ namespace eyeSign
             try
             {
                 Arm.Connect();
-                this.Connected = true;
+                Connected = true;
             }
             catch (Exception ex)
             {
@@ -78,7 +71,7 @@ namespace eyeSign
 
             // Now disconnect the arm.
             Arm.Disconnect();
-            this.Connected = false;
+            Connected = false;
         }
 
         public void Close()
