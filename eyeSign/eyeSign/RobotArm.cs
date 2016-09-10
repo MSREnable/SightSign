@@ -63,8 +63,6 @@ namespace eyeSign
             try
             {
                 Arm.Connect();
-                Arm.ZeroG(false);
-
                 this.Connected = true;
             }
             catch (Exception ex)
@@ -79,9 +77,7 @@ namespace eyeSign
             ArmDown(false);
 
             // Now disconnect the arm.
-            Arm.ZeroG(true);
             Arm.Disconnect();
-
             this.Connected = false;
         }
 
@@ -143,15 +139,7 @@ namespace eyeSign
             var x = r * Math.Sin(t);
             var y = r * Math.Cos(t);
             var z = (ArmIsDown ? 0.0 : 0.4) - ZShift;
-            if (_scaraMode)
-            {
-                // in scara mode, up is base rotation
-                Arm.MoveRTZ(x, z, -y);
-            }
-            else
-            {
-                Arm.Move(x, y, z);
-            }
+            Arm.Move(x, y, z, _scaraMode);
         }
 
         private const double ScalingFactorX = 1.2;
