@@ -58,14 +58,12 @@ namespace eyeSign
             if (_settings.RobotControl)
             {
                 RobotArm.Connect();
+                RobotArm.ArmDown(false); // Lift the arm.
             }
 
             SetDrawingAttributesFromSettings(inkCanvas.DefaultDrawingAttributes);
 
             LoadInkOnStartup();
-
-            // Lift the arm.
-            RobotArm.ArmDown(false);
         }
 
         private void SetDrawingAttributesFromSettings(DrawingAttributes attributes)

@@ -62,6 +62,8 @@ namespace eyeSign
 
         public void Disconnect()
         {
+            if (!Connected) return;
+
             // Lift the arm.
             ArmDown(false);
 
@@ -113,6 +115,8 @@ namespace eyeSign
 
         public void ArmDown(bool down)
         {
+            if (!Connected) return;
+
             Debug.WriteLine("Arm is " + (down ? "down" : "up"));
 
             // Set the ArmIsDown property regardless of whether the app is currently controlling
@@ -125,6 +129,8 @@ namespace eyeSign
         private bool _scaraMode = true;
         public void MoveRT(double r, double t)
         {
+            if (!Connected) return;
+
             var x = r * Math.Sin(t);
             var y = r * Math.Cos(t);
             var z = (ArmIsDown ? 0.0 : 0.4) - ZShift;
@@ -136,6 +142,8 @@ namespace eyeSign
 
         public void Move(Point pt)
         {
+            if (!Connected) return;
+
             LastPoint = pt;
             var scale = Settings1.Default.RobotWorkspaceScale;
             var x = ((pt.Y - _yShift) / _minDimensionHalf * scale * ScalingFactorX);
@@ -150,6 +158,8 @@ namespace eyeSign
 
         public void CircleTest()
         {
+            if (!Connected) return;
+
             // this is useful for observing backlash
             const double r = 300;
             const double xOffset = 450;
@@ -172,14 +182,10 @@ namespace eyeSign
         private const double FactorR = 100.0;
         private const double FactorT = 100.0;
 
-        public void MoveRT(Point p)
-        {
-            // move in screen X/Y conterted to R/T
-            MoveRT(p.X / FactorR, p.Y / FactorT);
-        }
-
         public void Home()
         {
+            if (!Connected) return;
+
             ArmDown(false);
             Move(new Point(0, 0));
         }
