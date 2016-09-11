@@ -8,7 +8,7 @@ using Microsoft.Robotics.Tests.Reflecta;
 
 namespace eyeSign
 {
-    public class UArm
+    public class UArm : IArm
     {
         private readonly string _port;
         private ReflectaClient _reflecta;

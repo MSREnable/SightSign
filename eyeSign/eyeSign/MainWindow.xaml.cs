@@ -48,7 +48,8 @@ namespace eyeSign
                 yScreen / 2.0, 
                 Math.Min(xScreen, yScreen) / 2.0, 
                 inkCanvas, 
-                canvas);
+                canvas,
+                new UArm());
 
             _settings = new Settings(RobotArm);
             DataContext = _settings;
