@@ -39,6 +39,10 @@
     <ApplicationIcon>Autograph.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="FSharp.Core, Version=4.3.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\external\FSharp.Core.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.EyeGaze.Filters, Version=2016.8.24.1555, Culture=neutral, processorArchitecture=AMD64">
       <HintPath>..\packages\Microsoft.EyeGaze.Mouse.2016.8.24.1555\lib\net461\Microsoft.EyeGaze.Filters.dll</HintPath>
       <Private>True</Private>
@@ -63,9 +67,18 @@
       <HintPath>..\packages\Microsoft.EyeGaze.Mouse.2016.8.24.1555\lib\net461\Microsoft.EyeGaze.Win32.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Microsoft.Robotics.Brief, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\external\Microsoft.Robotics.Brief.dll</HintPath>
+    </Reference>
+    <Reference Include="ReflectaClient, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\external\ReflectaClient.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Management" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -92,6 +105,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="PortDetails.cs" />
     <Compile Include="RobotArm.cs" />
     <Compile Include="Settings.cs" />
     <Compile Include="Settings1.Designer.cs">
@@ -102,6 +116,7 @@
     <Compile Include="SettingsWindow.xaml.cs">
       <DependentUpon>SettingsWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UArm.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -147,7 +162,9 @@
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings1.Designer.cs</LastGenOutput>
     </None>
-    <None Include="Signature.isf" />
+    <None Include="Signature.isf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -172,12 +189,6 @@
     <Content Include="vccorlib110.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\..\robot\uarm\uarm.fsproj">
-      <Project>{cc50ccee-5607-4a07-a5ad-cbeb3bbae3a2}</Project>
-      <Name>uarm</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

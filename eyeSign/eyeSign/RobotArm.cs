@@ -1,15 +1,8 @@
 using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
-using System.IO;
-using System.Threading;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Ink;
-using System.Windows.Media;
-using System.Windows.Shapes;
-using Microsoft.Robotics.UArm;
 
 namespace eyeSign
 {
@@ -42,7 +35,7 @@ namespace eyeSign
             }
         }
 
-        public UArm Arm = new UArm(Settings1.Default.RobotComPort);
+        public UArm Arm = new UArm();
 
         public RobotArm(double xShift, double yShift, double minDimensionHalf, InkCanvas inkCanvas, Grid canvas)
         {
@@ -59,9 +52,7 @@ namespace eyeSign
             try
             {
                 Arm.Connect();
-                Arm.ZeroG(false);
-
-                this.Connected = true;
+                Connected = true;
             }
             catch (Exception ex)
             {
@@ -75,10 +66,8 @@ namespace eyeSign
             ArmDown(false);
 
             // Now disconnect the arm.
-            Arm.ZeroG(true);
             Arm.Disconnect();
-
-            this.Connected = false;
+            Connected = false;
         }
 
         public void Close()
@@ -139,15 +128,7 @@ namespace eyeSign
             var x = r * Math.Sin(t);
             var y = r * Math.Cos(t);
             var z = (ArmIsDown ? 0.0 : 0.4) - ZShift;
-            if (_scaraMode)
-            {
-                // in scara mode, up is base rotation
-                Arm.MoveRTZ(x, z, -y);
-            }
-            else
-            {
-                Arm.Move(x, y, z);
-            }
+            Arm.Move(x, y, z, _scaraMode);
         }
 
         private const double ScalingFactorX = 1.2;

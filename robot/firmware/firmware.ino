@@ -1,5 +1,5 @@
 #include <Brief.h>
-#include <uarm_library.h>
+#include <Servo.h>
 
 #define VER 1
 
@@ -20,26 +20,57 @@
 
 #define RAD_PER_DEG (180.0 / PI)
 
+// servo control
+
+Servo servoT, servoA, servoB;
+
+void setServoStatus(bool state, int num) {
+  switch (num) {
+    case 0: if (state) servoT.attach(11); else servoT.detach();
+    case 1: if (state) servoA.attach(13); else servoA.detach();
+    case 2: if (state) servoB.attach(12); else servoB.detach();
+  }
+}
+
+double readServoAngle(int num) {
+  switch (num) {
+    case 0: return servoT.read();
+    case 1: return servoA.read();
+    case 2: return servoB.read();
+  }
+}
+
+void writeServoAngle(int num, double deg) {
+  switch (num) {
+    case 0: servoT.write(deg); break;
+    case 1: servoA.write(deg); break;
+    case 2: servoB.write(deg); break;
+  }
+}
+
 // joint control
+
+#define SERVO_THETA_NUM 0
+#define SERVO_LEFT_NUM 1
+#define SERVO_RIGHT_NUM 2
 
 double toRadians(double x) { return x / RAD_PER_DEG; }
 double toDegrees(double x) { return x * RAD_PER_DEG; }
 
 void attachAll(bool state) {
-  uarm.set_servo_status(state, SERVO_ROT_NUM);
-  uarm.set_servo_status(state, SERVO_LEFT_NUM);
-  uarm.set_servo_status(state, SERVO_RIGHT_NUM);
-  uarm.set_servo_status(state, SERVO_HAND_ROT_NUM);
+  setServoStatus(state, SERVO_THETA_NUM);
+  setServoStatus(state, SERVO_LEFT_NUM);
+  setServoStatus(state, SERVO_RIGHT_NUM);
 }
 
-double getJoint(int j) { return toRadians(uarm.read_servo_angle(j, false)); }
+double getJoint(int j) { return toRadians(readServoAngle(j)); }
 
 void setJoint(double v, int j) { // WARNING: allows self-collision!
-  uarm.write_servo_angle(j, toDegrees(v), false);
+  writeServoAngle(j, toDegrees(v));
 }
 
 void getJoints(double& t, double& a, double& b) {
-  t = getJoint(SERVO_ROT_NUM);
+  t = getJoint(SERVO_THETA_NUM);
   a = getJoint(SERVO_LEFT_NUM);
   b = getJoint(SERVO_RIGHT_NUM);
 }
@@ -49,7 +80,7 @@ void setJoints(double t, double a, double b) { // radians
   t = max(TMIN, min(TMAX, t));
   a = max(AMIN, min(AMAX, a));
   b = max(max(BMIN, CMIN - a), min(min(BMAX, CMAX - a), b));
-  setJoint(t, SERVO_ROT_NUM);
+  setJoint(t, SERVO_THETA_NUM);
   setJoint(a, SERVO_LEFT_NUM);
   setJoint(b, SERVO_RIGHT_NUM);
 }
@@ -193,11 +224,6 @@ void trajectoryRTZ(double r, double t, double z, int w) {
 double fixedToDouble(int16_t x) { return (double)x / 1000.0; }
 int16_t doubleToFixed(double x) { return (int16_t)(x * 1000.0); }
 
-void brief_beep() { uarm.alert(brief::pop(), 10, 100); }
-
-void brief_grip() { uarm.gripper_catch(); }
-void brief_release() { uarm.gripper_release(); }
-
 void brief_attach() {
   attachAll(true);
   getJoints(cur_t, cur_a, cur_b);
@@ -270,9 +296,6 @@ void brief_version() {
 void setup() {
   brief::setup();
   reflectaFrames::setup(19200);
-  brief::bind(100, brief_beep);
-  brief::bind(101, brief_grip);
-  brief::bind(102, brief_release);
   brief::bind(103, brief_attach);
   brief::bind(104, brief_detach);
   brief::bind(105, brief_getJoint);
@@ -287,7 +310,6 @@ void setup() {
   brief::bind(114, brief_version);
 
   attachAll(false);
-  uarm.alert(1, 10, 100);
 }
 
 void loop() {

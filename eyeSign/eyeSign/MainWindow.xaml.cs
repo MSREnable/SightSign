@@ -506,7 +506,7 @@ namespace eyeSign
                 MoveDotAndRobotToStylusPoint(stylusPt);
 
                 // Extend the ink stroke being drawn out to include the point where the dot is now.
-                _strokeBeingAnimated.StylusPoints.Add(stylusPt);
+                _strokeBeingAnimated?.StylusPoints.Add(stylusPt);
             }
 
             _inTimer = false;
@@ -522,8 +522,7 @@ namespace eyeSign
         private void AddFirstPointToNewStroke(StylusPoint pt)
         {
             // Create a new stroke for the continuing animation.
-            var ptCollection = new StylusPointCollection();
-            ptCollection.Add(pt);
+            var ptCollection = new StylusPointCollection {pt};
 
             _strokeBeingAnimated = new Stroke(ptCollection);
 
