@@ -1,4 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Management;
 using System.Threading;
 using Microsoft.Robotics.Brief;
 using Microsoft.Robotics.Tests.Reflecta;
@@ -11,9 +14,33 @@ namespace eyeSign
         private ReflectaClient _reflecta;
         private readonly Compiler _compiler = new Compiler();
 
-        public UArm(string port)
+        public UArm()
         {
-            _port = port;
+            var searcher = new ManagementObjectSearcher("root\\CIMV2", "SELECT * FROM Win32_PnPEntity");
+
+            var comPorts = new Dictionary<string, PortDetails>();
+            foreach (var queryObj in searcher.Get())
+            {
+                if (queryObj["Name"] == null || !queryObj["Name"].ToString().Contains("(COM")) continue;
+
+                var portDetails = new PortDetails
+                {
+                    Name = (string)queryObj["Name"],
+                    PnPId = (string)queryObj["PnPDeviceID"],
+                    Manufacturer = (string)queryObj["Manufacturer"]
+                };
+
+                comPorts.Add(portDetails.ComName, portDetails);
+            }
+
+            foreach (var port in comPorts.Values)
+            {
+                // uArm using generic windows 10 serial driver
+                if (port.PnPId == "FTDIBUS\\VID_0403+PID_6001+AL01H3RDA\\0000")
+                {
+                    _port = port.ComName;
+                }
+            }
         }
 
         private void Exec(int wait, string brief)

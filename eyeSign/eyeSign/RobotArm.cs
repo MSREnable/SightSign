@@ -37,7 +37,7 @@ namespace eyeSign
             }
         }
 
-        public UArm Arm = new UArm(Settings1.Default.RobotComPort);
+        public UArm Arm = new UArm();
 
         public RobotArm(double xShift, double yShift, double minDimensionHalf, InkCanvas inkCanvas, Grid canvas)
         {
