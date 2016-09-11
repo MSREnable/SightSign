@@ -35,14 +35,14 @@ namespace eyeSign
             }
         }
 
-        public UArm Arm = new UArm();
+        private readonly IArm _arm;
 
-        public RobotArm(double xShift, double yShift, double minDimensionHalf, InkCanvas inkCanvas, Grid canvas)
+        public RobotArm(double xShift, double yShift, double minDimensionHalf, InkCanvas inkCanvas, Grid canvas, IArm arm)
         {
             _xShift = xShift;
             _yShift = yShift;
             _minDimensionHalf = minDimensionHalf;
-
+            _arm = arm;
             Connect();
         }
 
@@ -51,7 +51,7 @@ namespace eyeSign
             Console.WriteLine(@"CONNECT");
             try
             {
-                Arm.Connect();
+                _arm.Connect();
                 Connected = true;
             }
             catch (Exception ex)
@@ -68,7 +68,7 @@ namespace eyeSign
             ArmDown(false);
 
             // Now disconnect the arm.
-            Arm.Disconnect();
+            _arm.Disconnect();
             Connected = false;
         }
 
@@ -134,7 +134,7 @@ namespace eyeSign
             var x = r * Math.Sin(t);
             var y = r * Math.Cos(t);
             var z = (ArmIsDown ? 0.0 : 0.4) - ZShift;
-            Arm.Move(x, y, z, _scaraMode);
+            _arm.Move(x, y, z, _scaraMode);
         }
 
         private const double ScalingFactorX = 1.2;
