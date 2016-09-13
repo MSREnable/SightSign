@@ -23,11 +23,10 @@ To replicate our experiment
 2)	Upload firmware to uArm
 3)	3D print
 4)	Mount 3D printed scara style
-5)	….?
+5)	…?
 
 # App usage
 The app has 3 main modes
-
 
 1. Stamp – When pressed, a green dot appears on the first part of the signature.  Use eye gaze (or mouse) to have the dot trace the signature.  At the same time, the application will send the entire signature to the robot
 2. Write – Similar to stamp, but requires the user to follow the green dot across the entire signature.  As the user completes each stroke, that stroke data is sent to the robot
@@ -36,7 +35,7 @@ Settings – Enables the robot to be configured for usage by setting the “z”
 
 # Robot firmware configuration
 
-To configure the robot firmware, see [robot/readme.md](robot/readme.md)
+To configure the robot firmware, see [robot/readme.md](robot/readme.md).
 
 # Code Notes
 
@@ -44,7 +43,11 @@ TODO by Jon Campbell
 
 # Accessibility Notes
 
-This application was designed to be accessible in a variety of ways. For full details, please review the [accessibility.md](docs/Accessibility.md)
+This application was designed to be accessible in a variety of ways. For full details, please review the [accessibility.md](docs/Accessibility.md).
+
+# Privacy
+
+Information regarding privacy can be found in the [privacy.txt](docs/privacy.txt).
 
 ---
 
