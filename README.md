@@ -2,7 +2,7 @@
 
 EyeSign, a Microsoft Garage project, showcases the power of eye gaze input, inking with Windows, and robotics.  When paired with the uArm (https://www.ufactory.cc/) the robot will sign whatever has been inked into the application.  
 
-# 👁+🐙+🤖=🎉 
+👁+🐙+🤖=🎉 
 
 # Hardware
 
@@ -14,16 +14,16 @@ For this project, we used the following hardware:
 
 Most Windows 10 should work, so long as they meet the requirements for the eye tracker you choose. We have tested on Surface Pro 3 and Surface Pro 4.
 
-There are many robotic arms available on the market. The uArm is readily available, inexpensive, open source, and based on maker friendly hardware.
+There are many robotic arms available on the market. We used the uArm because it is readily available, inexpensive, open source, and based on maker friendly hardware.
 
 # Installation
 
 To replicate our experiment
-1)	Download application
-2)	Upload firmware to uArm
-3)	3D print
-4)	Mount 3D printed scara style
-5)	…?
+1. Download application
+2. Upload firmware to uArm
+3. 3D print
+4. Mount 3D printed scara style
+5. …?
 
 # App usage
 The app has 3 main modes
@@ -39,7 +39,7 @@ To configure the robot firmware, see [robot/readme.md](robot/readme.md).
 
 # Code Notes
 
-TODO by Jon Campbell
+TODO
 
 # Accessibility Notes
 
