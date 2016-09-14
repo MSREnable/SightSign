@@ -30,7 +30,7 @@ Additionally, a combined limit is set. Since the A/B (left/right) servos are mou
 
 * `CMIN`/`CMAX` - Combined (simple sum of A + B) limits
 
-The `setJoint(...)` API does not handle self-collision at all. However, the `setJoints(...)` API constrains values to stay within joint limits; first within individual joint limits and then within the combined A/B limits.
+The `setJoint(...)` API does not handle self-collision at all. However, the `setJoints(...)` API constrains values to stay within joint limits; first within individual limits and then within the combined A/B limits.
 
 The `getJoint(...)` and `getJoints(...)` APIs return the current servo values. If servos are unattached then the arm is free to be manually moved and these APIs report the current actual position.
 
@@ -73,7 +73,13 @@ The `radiusThetaToXY(...)` function merely converts from polar to 2D coordinates
 
 For some applications, it may be useful to control position directly in polar coordinates along with Z. This can be done with the `trajectoryRTZ(...)` API (which internally just uses `radiusThetaToXY(...)` and `trajectoryXYZ(...)`).
 
-For the EyeSign project in particular, we mounted the arm sideways and used theta to raise/lower the pen and then treated radius/Z as X/Y.
+## SCARA Mode
+
+Speaking of hybrid control, for the EyeSign project in particular we mounted the arm _sideways_, used theta to raise/lower the pen and then treated radius/Z as X/Y. The idea was to physically position the arm such that at a particular base rotation (theta), the A/B joints would cause the arm to move in a plane parallel to the writing surface; this way avoiding any base movement while writing. We called this "SCARA Mode". 
+
+You can see [here in UArm.cs](../eyeSign/eyeSign/UArm.cs#L97-L111) that in `scara` mode it uses RTZ control, treating `x` as radius, `y` as negative Z, and `z` as theta. In non-SCARA mode it uses plain XYZ control.
+
+If you will be using the uArm without modification, then set [the `_scaraMode` flag here](../eyeSign/eyeSign/RobotArm.cs#L129) to `false`. The issue you may find is that the granularity of base rotation movement causes "jagged" writing. 
 
 ## Brief Bindings
 
