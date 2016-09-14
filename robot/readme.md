@@ -75,9 +75,9 @@ For some applications, it may be useful to control position directly in polar co
 
 ## SCARA Mode
 
-Speaking of hybrid control, for the EyeSign project in particular we mounted the arm _sideways_, used theta to raise/lower the pen and then treated radius/Z as X/Y. The idea was to physically position the arm such that at a particular base rotation (theta), the A/B joints would cause the arm to move in a plane parallel to the writing surface; this way avoiding any base movement while writing. We called this "SCARA Mode". 
+Speaking of hybrid control, for the EyeSign project in particular we mounted the arm _sideways_ and used theta to raise/lower the pen and then treated radius/Z as X/Y. The idea was to physically position the arm such that at a particular base rotation (theta), the A/B joints would cause the arm to move in a plane parallel to the writing surface; this way avoiding any base movement while writing. We called this "[SCARA](https://en.wikipedia.org/wiki/SCARA) Mode". 
 
-You can see [here in UArm.cs](../eyeSign/eyeSign/UArm.cs#L97-L111) that in `scara` mode it uses RTZ control, treating `x` as radius, `y` as negative Z, and `z` as theta. In non-SCARA mode it uses plain XYZ control.
+You can see [here in UArm.cs](../eyeSign/eyeSign/UArm.cs#L97-L111) that in `scara` mode it uses RTZ control, treating `x` as radius, `y` as negative Z, and `z` as theta (note that `z` is an _angle_ rather than a coordinate in this case). In non-SCARA mode it uses plain XYZ control.
 
 If you will be using the uArm without modification, then set [the `_scaraMode` flag here](../eyeSign/eyeSign/RobotArm.cs#L129) to `false`. The issue you may find is that the granularity of base rotation movement causes "jagged" writing. 
 
