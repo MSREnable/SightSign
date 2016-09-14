@@ -19,11 +19,13 @@ There are many robotic arms available on the market. We used the uArm because it
 # Installation
 
 To replicate our experiment
-1. Download application
-2. Upload firmware to uArm
-3. 3D print
-4. Mount 3D printed scara style
-5. …?
+
+1. Clone the repo
+2. Upload firmware to uArm via the Arduino IDE
+3. Mount the arm
+4. Connect the arm and the Tobii sensor
+5. Calibrate your Tobii sensor
+5. Open the solution in Visual Studio and run
 
 # App usage
 The app has 3 main modes
