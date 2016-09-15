@@ -22,7 +22,7 @@ namespace eyeSign
     public partial class MainWindow
     {
         public RobotArm RobotArm { get; }
-        private Settings _settings;
+        private readonly Settings _settings;
 
         // Related to the animation of the dot.
         private Stroke _strokeBeingAnimated;
@@ -47,8 +47,6 @@ namespace eyeSign
                 xScreen / 2.0, 
                 yScreen / 2.0, 
                 Math.Min(xScreen, yScreen) / 2.0, 
-                inkCanvas, 
-                canvas,
                 new UArm());
 
             _settings = new Settings(RobotArm);
@@ -94,8 +92,7 @@ namespace eyeSign
             GazeMouse.DetachAll();
         }
 
-#region LoadInk
-
+        #region LoadInk
         // Load up ink based on the ink that was shown when the app was last run.
         private void LoadInkOnStartup()
         {
@@ -123,11 +120,9 @@ namespace eyeSign
             // Remove any existing ink first.
             inkCanvas.Strokes.Clear();
 
-            StrokeCollection strokeCollection = new StrokeCollection();
-
             // Assume the file is valid and accessible.
             var file = new FileStream(filename, FileMode.Open, FileAccess.Read);
-            strokeCollection = new StrokeCollection(file);
+            var strokeCollection = new StrokeCollection(file);
             file.Close();
 
             if (strokeCollection.Count > 0)
@@ -163,21 +158,21 @@ namespace eyeSign
 
             for (var idx = 0; idx < strokeCollection.Count; ++idx)
             {
-                StylusPointCollection existingStylusPoints = strokeCollection[idx].StylusPoints;
+                var existingStylusPoints = strokeCollection[idx].StylusPoints;
                 if (existingStylusPoints.Count > 0)
                 {
                     // First create a PathGeometry from all the points making up this stroke.
-                    Point start = existingStylusPoints[0].ToPoint();
+                    var start = existingStylusPoints[0].ToPoint();
 
-                    List<LineSegment> segments = new List<LineSegment>();
+                    var segments = new List<LineSegment>();
 
-                    for (int i = 1; i < existingStylusPoints.Count; i++)
+                    for (var i = 1; i < existingStylusPoints.Count; i++)
                     {
                         segments.Add(new LineSegment(existingStylusPoints[i].ToPoint(), true));
                     }
 
-                    PathFigure figure = new PathFigure(start, segments, false);
-                    PathGeometry pathGeometry = new PathGeometry();
+                    var figure = new PathFigure(start, segments, false);
+                    var pathGeometry = new PathGeometry();
                     pathGeometry.Figures.Add(figure);
 
                     // Get the length of the PathGeometry. The number of points created along each
@@ -233,7 +228,7 @@ namespace eyeSign
 
                 foreach (var pathSegment in pf.Segments)
                 {
-                    LineSegment lineSegment = pathSegment as LineSegment;
+                    var lineSegment = pathSegment as LineSegment;
                     if (lineSegment != null)
                     {
                         length += Distance(start, lineSegment.Point);
@@ -242,7 +237,7 @@ namespace eyeSign
                     }
                     else
                     {
-                        PolyLineSegment polylineSegment = pathSegment as PolyLineSegment;
+                        var polylineSegment = pathSegment as PolyLineSegment;
                         if (polylineSegment != null)
                         {
                             foreach (var point in polylineSegment.Points)
@@ -268,10 +263,9 @@ namespace eyeSign
             return Math.Sqrt(Math.Pow(p1.X - p2.X, 2) + Math.Pow(p1.Y - p2.Y, 2));
         }
 
-#endregion LoadInk
+        #endregion LoadInk
 
-#region SendInkToRobotAndAnimateDot
-
+        #region SendInkToRobotAndAnimateDot
         // Show the dot at the start of the ink, and when that's clicked, animate the dot through
         // the entire signature, sending the point data to the robot as the dot progresses.
         private void StampButton_Click(object sender, RoutedEventArgs e)
@@ -486,7 +480,7 @@ namespace eyeSign
                 var stylusPtPrevious = inkCanvas.Strokes[_currentAnimatedStrokeIndex].StylusPoints[_currentAnimatedPointIndex - 1];
 
                 // Move to a point that's sufficiently far from the point that the dot's currently at.
-                var threshold = 1;
+                const int threshold = 1;
 
                 while ((Math.Abs(stylusPt.X - stylusPtPrevious.X) < threshold) &&
                        (Math.Abs(stylusPt.Y - stylusPtPrevious.Y) < threshold))
@@ -545,10 +539,9 @@ namespace eyeSign
             MoveDotAndRobotToStylusPoint(stylusPtNext);
         }
 
-#endregion SendInkToRobotAndAnimateDot
+        #endregion SendInkToRobotAndAnimateDot
 
-#region ButtonClickHandlers
-
+        #region ButtonClickHandlers
         // When the Edit button is clicked, the user can ink directly in the app.
         private void EditButton_Click(object sender, RoutedEventArgs e)
         {
@@ -589,10 +582,11 @@ namespace eyeSign
         // Save whatever ink is shown in the InkCanvas that the user can ink on, to an ISF file.
         private void SaveButton_Click(object sender, RoutedEventArgs e)
         {
-            var dlg = new SaveFileDialog();
-
-            dlg.DefaultExt = ".isf";
-            dlg.Filter = "ISF files (*.isf)|*.isf";
+            var dlg = new SaveFileDialog
+            {
+                DefaultExt = ".isf",
+                Filter = "ISF files (*.isf)|*.isf"
+            };
 
             var result = dlg.ShowDialog();
             if (result == true)
@@ -617,10 +611,11 @@ namespace eyeSign
         // Load up ink from an ISF file that the user selects from the OpenFileDialog.
         private void LoadButton_Click(object sender, RoutedEventArgs e)
         {
-            var dlg = new OpenFileDialog();
-
-            dlg.DefaultExt = ".isf";
-            dlg.Filter = "ISF files (*.isf)|*.isf";
+            var dlg = new OpenFileDialog
+            {
+                DefaultExt = ".isf",
+                Filter = "ISF files (*.isf)|*.isf"
+            };
 
             var result = dlg.ShowDialog();
             if (result == true)
@@ -635,22 +630,12 @@ namespace eyeSign
 
         private void SettingsButton_Click(object sender, RoutedEventArgs e)
         {
-            var settingsWindow = new SettingsWindow(this, _settings, RobotArm);
+            var settingsWindow = new SettingsWindow(this, _settings, RobotArm) {Owner = this};
 
-            settingsWindow.Owner = this;
             settingsWindow.ShowDialog();
         }
 
-#endregion ButtonClickHandlers
-
-#region DotClickHandler
-
         private void Dot_OnClick(object sender, RoutedEventArgs e)
-        {
-            MoveDot();
-        }
-
-        private void MoveDot()
         {
             if (_dispatcherTimerDotAnimation != null)
             {
@@ -680,7 +665,7 @@ namespace eyeSign
                     {
                         // We're at the start of a stroke, so start animating the dot.
                         _dispatcherTimerDotAnimation.Start();
-                                                                    
+
                         // Show a translucent dot while it's being animated. If a high contrast theme
                         // is active, keep the dot at 100% opacity so give it high contrast against
                         // its background.
@@ -693,10 +678,9 @@ namespace eyeSign
             }
         }
 
-#endregion DotClickHandler
+        #endregion ButtonClickHandlers
 
-#region RobotControl
-
+        #region RobotControl
         private void Window_KeyDown(object sender, KeyEventArgs e)
         {
             switch (e.Key)
@@ -721,10 +705,10 @@ namespace eyeSign
             RobotArm.ZShift += Math.Sign(e.Delta) * 0.01;
         }
 
-#endregion RobotControl
+        #endregion RobotControl
     }
 
-#region ValueConverters
+    #region ValueConverters
 
     public class ColorToSolidBrushConverter : IValueConverter
     {
@@ -805,5 +789,5 @@ namespace eyeSign
         }
     }
 
-#endregion ValueConverters
+    #endregion ValueConverters
 }

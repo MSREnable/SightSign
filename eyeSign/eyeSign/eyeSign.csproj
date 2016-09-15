@@ -164,7 +164,7 @@
       <LastGenOutput>Settings1.Designer.cs</LastGenOutput>
     </None>
     <None Include="Signature.isf">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>
   <ItemGroup>

@@ -37,7 +37,7 @@ namespace eyeSign
 
         private readonly IArm _arm;
 
-        public RobotArm(double xShift, double yShift, double minDimensionHalf, InkCanvas inkCanvas, Grid canvas, IArm arm)
+        public RobotArm(double xShift, double yShift, double minDimensionHalf, IArm arm)
         {
             _xShift = xShift;
             _yShift = yShift;
