@@ -81,6 +81,11 @@ You can see [here in UArm.cs](../eyeSign/eyeSign/UArm.cs#L97-L111) that in `scar
 
 If you will be using the uArm without modification, then set [the `_scaraMode` flag here](../eyeSign/eyeSign/RobotArm.cs#L129) to `false`. The issue you may find is that the granularity of base rotation movement causes "jagged" writing. 
 
+### 3D Printed Files 
+
+The [uArm base](parts/uarm%20base.STL) replaces the base that comes with the arm and makes it less slippy.
+A pair of [uArm pen holders](parts/uarm%20pen%20holder.STL) replaces the gripper to hold a marker in sideways (SCARA) configuration.
+
 ## Brief Bindings
 
 There are zero-operand versions of the above APIs that take their arguments from the Brief stack. These are bound to Brief instructions. To use them in the interactive (which is *very* useful for incremental development without flashing), use something like the following bindings:
@@ -102,8 +107,3 @@ You can then connect (e.g. `'com4 conn` or `'/dev/ttyUSB0 conn`) and inspect or 
 For example, this was very useful in determining the joint limit values we later embedded and for quickly experimenting with backlash correction.
 
 This is how we ultimately talk to the arm through compiled Brief sent as Reflecta frames. The `UArm` class [makes these instruction bindings](../eyeSign/eyeSign/UArm.cs#L69-L72) and compiles fragments to execute movements, attach/detach, ...
-
-## 3d printed files 
-
-the uarm base replaces the base that come with the arm and make it less slippy 
-the uarm pen holder you will need 2 of and this replaces the gripper to hold a marker.
