@@ -102,3 +102,8 @@ You can then connect (e.g. `'com4 conn` or `'/dev/ttyUSB0 conn`) and inspect or 
 For example, this was very useful in determining the joint limit values we later embedded and for quickly experimenting with backlash correction.
 
 This is how we ultimately talk to the arm through compiled Brief sent as Reflecta frames. The `UArm` class [makes these instruction bindings](../eyeSign/eyeSign/UArm.cs#L69-L72) and compiles fragments to execute movements, attach/detach, ...
+
+## 3d printed files 
+
+the uarm base replaces the base that come with the arm and make it less slippy 
+the uarm pen holder you will need 2 of and this replaces the gripper to hold a marker.
