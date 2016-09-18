@@ -1,9 +1,9 @@
-﻿<Window x:Class="eyeSign.MainWindow"
+﻿<Window x:Class="SightSign.MainWindow"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:local="clr-namespace:eyeSign"
+    xmlns:sightSign="clr-namespace:SightSign"
     mc:Ignorable="d"
     Title="Autograph" 
     Height="480" 
@@ -15,11 +15,11 @@
 
     <Window.Resources>
 
-        <local:ArmConnectedToContentConverter x:Key="ArmConnectedToContentConverter"/>
-        <local:ArmConnectedToHelpTextConverter x:Key="ArmConnectedToHelpTextConverter"/>
-        <local:ArmStateToDotFillConverter x:Key="ArmStateToDotFillConverter"/>
-        <local:ArmStateToDotWidthConverter x:Key="ArmStateToDotWidthConverter"/>
-        <local:ColorToSolidBrushConverter x:Key="ColorToSolidBrushConverter"/>
+        <sightSign:ArmConnectedToContentConverter x:Key="ArmConnectedToContentConverter"/>
+        <sightSign:ArmConnectedToHelpTextConverter x:Key="ArmConnectedToHelpTextConverter"/>
+        <sightSign:ArmStateToDotFillConverter x:Key="ArmStateToDotFillConverter"/>
+        <sightSign:ArmStateToDotWidthConverter x:Key="ArmStateToDotWidthConverter"/>
+        <sightSign:ColorToSolidBrushConverter x:Key="ColorToSolidBrushConverter"/>
 
         <!-- Style for the big round buttons shown in the app. -->
         <Style x:Key="SimpleButton" TargetType="{x:Type Button}" BasedOn="{x:Null}">

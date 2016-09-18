@@ -1,4 +1,4 @@
-﻿namespace eyeSign
+﻿namespace SightSign
 {
     /// <summary>
     /// Interaction logic for App.xaml

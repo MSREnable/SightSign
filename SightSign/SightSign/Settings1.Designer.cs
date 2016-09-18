@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace eyeSign {
+namespace SightSign {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]

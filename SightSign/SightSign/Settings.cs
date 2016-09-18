@@ -2,7 +2,7 @@
 using System.Windows;
 using System.Windows.Media;
 
-namespace eyeSign
+namespace SightSign
 {
     // Settings class for many visual properties of the app UI. These are not currently 
     // configurable by the user. Some properties are bound to the main app UI.

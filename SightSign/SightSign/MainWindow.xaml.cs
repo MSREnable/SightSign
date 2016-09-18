@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Globalization;
 using System.IO;
 using System.Windows;
@@ -10,10 +12,8 @@ using System.Windows.Media;
 using System.Windows.Threading;
 using Microsoft.EyeGaze.Mouse;
 using Microsoft.Win32;
-using System.Diagnostics;
-using System.Collections.Generic;
 
-namespace eyeSign
+namespace SightSign
 {
     // This Window hosts two InkCanvases. The InkCanvas that's lower in the z-order shows ink 
     // which is to be traced out by an animating dot. As the dot moves, it leaves a trail of 

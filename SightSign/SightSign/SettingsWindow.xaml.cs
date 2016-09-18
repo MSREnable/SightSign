@@ -1,6 +1,6 @@
 ﻿using System.Windows;
 
-namespace eyeSign
+namespace SightSign
 {
     // A window showing the configurable settings in the app. 
     public partial class SettingsWindow : Window

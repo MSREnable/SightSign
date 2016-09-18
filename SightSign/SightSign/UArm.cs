@@ -1,12 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Management;
 using System.Threading;
 using Microsoft.Robotics.Brief;
 using Microsoft.Robotics.Tests.Reflecta;
 
-namespace eyeSign
+namespace SightSign
 {
     public class UArm : IArm
     {

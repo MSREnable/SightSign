@@ -1,4 +1,4 @@
-﻿namespace eyeSign
+﻿namespace SightSign
 {
     public interface IArm
     {
