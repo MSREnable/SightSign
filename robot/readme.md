@@ -1,10 +1,10 @@
-# EyeSign Robot
+# SightSign Robot
 
 The arm being used is the [uArm Metal from uFactory](https://www.ufactory.cc/en/uarm_metal/). We've replaced the firmware with our own.
 
 # Installation
 
-* Load [`firmware.ino`](https://github.com/MSREnable/EyeSign/blob/master/robot/firmware/firmware.ino) into the [Arduino IDE](https://www.arduino.cc/en/Main/Software)
+* Load [`firmware.ino`](robot/firmware/firmware.ino) into the [Arduino IDE](https://www.arduino.cc/en/Main/Software)
 * Manually drop the [Brief and Reflecta](https://github.com/AshleyF/brief/tree/gh-pages/embedded/Firmware/libraries) libraries into the `Documents/Arduino/libraries` directory
 * Compile and upload the sketch
 * Note: There is no dependency on [UArmForArduino](https://github.com/uArm-Developer/UArmForArduino)
@@ -75,11 +75,11 @@ For some applications, it may be useful to control position directly in polar co
 
 ## SCARA Mode
 
-Speaking of hybrid control, for the EyeSign project in particular we mounted the arm _sideways_ and used theta to raise/lower the pen and then treated radius/Z as X/Y. The idea was to physically position the arm such that at a particular base rotation (theta), the A/B joints would cause the arm to move in a plane parallel to the writing surface; this way avoiding any base movement while writing. We called this "[SCARA](https://en.wikipedia.org/wiki/SCARA) Mode". 
+Speaking of hybrid control, for the SightSign project in particular we mounted the arm _sideways_ and used theta to raise/lower the pen and then treated radius/Z as X/Y. The idea was to physically position the arm such that at a particular base rotation (theta), the A/B joints would cause the arm to move in a plane parallel to the writing surface; this way avoiding any base movement while writing. We called this "[SCARA](https://en.wikipedia.org/wiki/SCARA) Mode". 
 
-You can see [here in UArm.cs](../eyeSign/eyeSign/UArm.cs#L97-L111) that in `scara` mode it uses RTZ control, treating `x` as radius, `y` as negative Z, and `z` as theta (note that `z` is an _angle_ rather than a coordinate in this case). In non-SCARA mode it uses plain XYZ control.
+You can see [here in UArm.cs](../SightSign/SightSign/UArm.cs#L97-L111) that in `scara` mode it uses RTZ control, treating `x` as radius, `y` as negative Z, and `z` as theta (note that `z` is an _angle_ rather than a coordinate in this case). In non-SCARA mode it uses plain XYZ control.
 
-If you will be using the uArm without modification, then set [the `_scaraMode` flag here](../eyeSign/eyeSign/RobotArm.cs#L129) to `false`. The issue you may find is that the granularity of base rotation movement causes "jagged" writing. 
+If you will be using the uArm without modification, then set [the `_scaraMode` flag here](../SightSign/SightSign/RobotArm.cs#L129) to `false`. The issue you may find is that the granularity of base rotation movement causes "jagged" writing. 
 
 ### 3D Printed Files 
 
@@ -106,4 +106,4 @@ You can then connect (e.g. `'com4 conn` or `'/dev/ttyUSB0 conn`) and inspect or 
 
 For example, this was very useful in determining the joint limit values we later embedded and for quickly experimenting with backlash correction.
 
-This is how we ultimately talk to the arm through compiled Brief sent as Reflecta frames. The `UArm` class [makes these instruction bindings](../eyeSign/eyeSign/UArm.cs#L69-L72) and compiles fragments to execute movements, attach/detach, ...
+This is how we ultimately talk to the arm through compiled Brief sent as Reflecta frames. The `UArm` class [makes these instruction bindings](../SightSign/SightSign/UArm.cs#L69-L72) and compiles fragments to execute movements, attach/detach, ...

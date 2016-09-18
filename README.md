@@ -57,7 +57,7 @@ Information regarding privacy can be found in the [privacy.md](docs/privacy.md).
 
 # License
 
-License information can be found in [LICENSE](LICENSE)
+This source code is provided under the [MIT License](LICENSE).
 
 ---
 

@@ -44,7 +44,7 @@ namespace SightSign.Properties {
         internal static ResourceManager ResourceManager {
             get {
                 if (ReferenceEquals(resourceMan, null)) {
-                    var temp = new ResourceManager("eyeSign.Properties.Resources", typeof(Resources).Assembly);
+                    var temp = new ResourceManager("SightSign.Properties.Resources", typeof(Resources).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
