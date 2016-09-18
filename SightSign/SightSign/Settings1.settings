@@ -1,0 +1,75 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="eyeSign" GeneratedClassName="Settings1">
+  <Profiles />
+  <Settings>
+    <Setting Name="LoadedInkLocation" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="ShowDotWhenWriting" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="ShowTranslucentInkWhenWriting" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="InkColor" Type="System.Drawing.Color" Scope="User">
+      <Value Profile="(Default)">White</Value>
+    </Setting>
+    <Setting Name="FadedInkColor" Type="System.Drawing.Color" Scope="User">
+      <Value Profile="(Default)">64, 255, 255, 255</Value>
+    </Setting>
+    <Setting Name="InkWidth" Type="System.Double" Scope="User">
+      <Value Profile="(Default)">10</Value>
+    </Setting>
+    <Setting Name="DotColor" Type="System.Drawing.Color" Scope="User">
+      <Value Profile="(Default)">128, 254, 212, 42</Value>
+    </Setting>
+    <Setting Name="DotWidth" Type="System.Double" Scope="User">
+      <Value Profile="(Default)">100</Value>
+    </Setting>
+    <Setting Name="AnimationInterval" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">20</Value>
+    </Setting>
+    <Setting Name="AnimationPointsOnFirstStroke" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">200</Value>
+    </Setting>
+    <Setting Name="RobotComPort" Type="System.String" Scope="User">
+      <Value Profile="(Default)">com7</Value>
+    </Setting>
+    <Setting Name="RobotZShift" Type="System.Double" Scope="User">
+      <Value Profile="(Default)">1.66</Value>
+    </Setting>
+    <Setting Name="RobotWorkspaceScale" Type="System.Double" Scope="User">
+      <Value Profile="(Default)">0.35</Value>
+    </Setting>
+    <Setting Name="RobotControl" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="DotDownWidth" Type="System.Double" Scope="User">
+      <Value Profile="(Default)">100</Value>
+    </Setting>
+    <Setting Name="DotDownColor" Type="System.Drawing.Color" Scope="User">
+      <Value Profile="(Default)">254, 212, 42</Value>
+    </Setting>
+    <Setting Name="RobotRadiusBacklash" Type="System.Double" Scope="User">
+      <Value Profile="(Default)">0</Value>
+    </Setting>
+    <Setting Name="RobotThetaBacklash" Type="System.Double" Scope="User">
+      <Value Profile="(Default)">0</Value>
+    </Setting>
+    <Setting Name="BackgroundColor" Type="System.Drawing.Color" Scope="User">
+      <Value Profile="(Default)">Black</Value>
+    </Setting>
+    <Setting Name="ButtonBackgroundColor" Type="System.Drawing.Color" Scope="User">
+      <Value Profile="(Default)">254, 212, 42</Value>
+    </Setting>
+    <Setting Name="ButtonTextColor" Type="System.Drawing.Color" Scope="User">
+      <Value Profile="(Default)">Black</Value>
+    </Setting>
+    <Setting Name="ButtonBorderColor" Type="System.Drawing.Color" Scope="User">
+      <Value Profile="(Default)">White</Value>
+    </Setting>
+    <Setting Name="ButtonBorderWidth" Type="System.Double" Scope="User">
+      <Value Profile="(Default)">2</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>
