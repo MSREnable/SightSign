@@ -1,6 +1,6 @@
-# EyeSign
+# SightSign
 
-EyeSign, a Microsoft Garage project, showcases the power of eye gaze input, inking with Windows, and robotics.  When paired with the uArm (https://www.ufactory.cc/) the robot will sign whatever has been inked into the application.  
+SightSign, a Microsoft Garage project, showcases the power of eye gaze input, inking with Windows, and robotics.  When paired with the uArm (https://www.ufactory.cc/) the robot will sign whatever has been inked into the application.  
 
 👁+🐙+🤖=🎉 
 
@@ -41,7 +41,7 @@ To configure the robot firmware, see [robot/readme.md](robot/readme.md).
 
 # Code Notes
 
-The application is a WPF .NET application written in C#, with C/C++ Arduino code for the uArm. Code for the uArm can be found in [robot](robot), while code for the WPF application can be found in [eyeSign](eyeSign). The code is reasonably straight forward, and can be broken down into a few main parts:
+The application is a WPF .NET application written in C#, with C/C++ Arduino code for the uArm. Code for the uArm can be found in [robot](robot), while code for the WPF application can be found in [SightSign](SightSign). The code is reasonably straight forward, and can be broken down into a few main parts:
 
 - Code to support inking, including loading and saving
 - Code to support talking to the robot arm
@@ -53,7 +53,7 @@ This application was designed to be accessible in a variety of ways. For full de
 
 # Privacy
 
-Information regarding privacy can be found in the [privacy.txt](docs/privacy.txt).
+Information regarding privacy can be found in the [privacy.md](docs/privacy.md).
 
 # License
 
