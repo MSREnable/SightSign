@@ -474,7 +474,7 @@ namespace SightSign
             }
             else
             {
-                // We're continuing to animate the stroke we'we were already on.
+                // We're continuing to animate the stroke that we're were already on.
 
                 var stylusPt = inkCanvas.Strokes[_currentAnimatedStrokeIndex].StylusPoints[_currentAnimatedPointIndex];
                 var stylusPtPrevious = inkCanvas.Strokes[_currentAnimatedStrokeIndex].StylusPoints[_currentAnimatedPointIndex - 1];
@@ -640,7 +640,7 @@ namespace SightSign
             if (_dispatcherTimerDotAnimation != null)
             {
                 // Only react to the click on the dot if the the timer's not currently running.
-                // If the time is running, then the dot's already being animated.
+                // If the timer is running, then the dot's already being animated.
                 if (!_dispatcherTimerDotAnimation.IsEnabled)
                 {
                     // Are we at the end of a stroke?
@@ -667,7 +667,7 @@ namespace SightSign
                         _dispatcherTimerDotAnimation.Start();
 
                         // Show a translucent dot while it's being animated. If a high contrast theme
-                        // is active, keep the dot at 100% opacity so give it high contrast against
+                        // is active, keep the dot at 100% opacity to keep it high contrast against
                         // its background.
                         if (!SystemParameters.HighContrast)
                         {
