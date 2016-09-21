@@ -35,7 +35,7 @@ namespace SightSign
             foreach (var port in comPorts.Values)
             {
                 // uArm using generic windows 10 serial driver
-                if (port.PnPId == "FTDIBUS\\VID_0403+PID_6001+AL01H3RDA\\0000")
+                if (port.PnPId.Contains("FTDIBUS\\VID_0403+PID_6001"))
                 {
                     _port = port.ComName;
                 }
