@@ -6,7 +6,7 @@ using System.Windows;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("SightSign")]
-[assembly: AssemblyDescription("An application bringing together eye tracking, inking and robotics to allow signing with your eye sight.")]
+[assembly: AssemblyDescription("An application bringing together eye tracking, inking and robotics to enable signing with your eye sight.")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Microsoft")]
 [assembly: AssemblyProduct("SightSign")]
