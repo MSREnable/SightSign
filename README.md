@@ -60,5 +60,4 @@ Information regarding privacy can be found in the [privacy.md](docs/privacy.md).
 This source code is provided under the [MIT License](LICENSE).
 
 ---
-
-The Microsoft Garage turns fresh ideas into real projects. Learn more at [http://microsoft.com/garage](http://microsoft.com/garage).
+The Microsoft Garage is an outlet for experimental projects for you to try. Learn more at [http://garage.microsoft.com](http://microsoft.com/garage). 
