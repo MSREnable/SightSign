@@ -1,6 +1,6 @@
-# The Accessibility of the SightSign app
+# The Accessibility of the Sight Sign app
 
-The following technical details relate to the accessibility of the SightSign app.
+The following technical details relate to the accessibility of the Sight Sign app.
 
 # Input methods
 

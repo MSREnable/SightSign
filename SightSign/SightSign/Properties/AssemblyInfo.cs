@@ -5,11 +5,11 @@ using System.Windows;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("SightSign")]
+[assembly: AssemblyTitle("Sight Sign")]
 [assembly: AssemblyDescription("An application bringing together eye tracking, inking and robotics to enable signing with your eye sight.")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Microsoft")]
-[assembly: AssemblyProduct("SightSign")]
+[assembly: AssemblyProduct("Sight Sign")]
 [assembly: AssemblyCopyright("Copyright © 2016")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
