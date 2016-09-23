@@ -41,7 +41,7 @@ To configure the robot firmware, see [robot/readme.md](robot/readme.md).
 
 # Code Notes
 
-The application is a WPF .NET application written in C#, with C/C++ Arduino code for the uArm. Code for the uArm can be found in [robot](robot), while code for the WPF application can be found in [SightSign](SightSign). The code is reasonably straight forward, and can be broken down into a few main parts:
+The application is a WPF .NET application written in C#, with C/C++ Arduino code for the uArm. Code for the uArm can be found in [robot](robot), while code for the WPF application can be found in [Sight Sign](SightSign). The code is reasonably straight forward, and can be broken down into a few main parts:
 
 - Code to support inking, including loading and saving
 - Code to support talking to the robot arm
