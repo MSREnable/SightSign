@@ -43,28 +43,28 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\external\FSharp.Core.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.EyeGaze.Filters, Version=2016.8.24.1555, Culture=neutral, processorArchitecture=AMD64">
-      <HintPath>..\packages\Microsoft.EyeGaze.Mouse.2016.8.24.1555\lib\net461\Microsoft.EyeGaze.Filters.dll</HintPath>
+    <Reference Include="Microsoft.HandsFree.Filters, Version=1.1.2074.0, Culture=neutral, processorArchitecture=AMD64">
+      <HintPath>..\packages\SightSignAPI.1.1.2074\lib\net461\Microsoft.HandsFree.Filters.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Microsoft.EyeGaze.Mouse, Version=2016.8.24.1555, Culture=neutral, processorArchitecture=AMD64">
-      <HintPath>..\packages\Microsoft.EyeGaze.Mouse.2016.8.24.1555\lib\net461\Microsoft.EyeGaze.Mouse.dll</HintPath>
+    <Reference Include="Microsoft.HandsFree.Mouse, Version=1.1.2074.0, Culture=neutral, processorArchitecture=AMD64">
+      <HintPath>..\packages\SightSignAPI.1.1.2074\lib\net461\Microsoft.HandsFree.Mouse.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Microsoft.EyeGaze.MVVM, Version=2016.8.24.1555, Culture=neutral, processorArchitecture=AMD64">
-      <HintPath>..\packages\Microsoft.EyeGaze.Mouse.2016.8.24.1555\lib\net461\Microsoft.EyeGaze.MVVM.dll</HintPath>
+    <Reference Include="Microsoft.HandsFree.MVVM, Version=1.1.2074.0, Culture=neutral, processorArchitecture=AMD64">
+      <HintPath>..\packages\SightSignAPI.1.1.2074\lib\net461\Microsoft.HandsFree.MVVM.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Microsoft.EyeGaze.Sensors, Version=2016.8.24.1555, Culture=neutral, processorArchitecture=AMD64">
-      <HintPath>..\packages\Microsoft.EyeGaze.Mouse.2016.8.24.1555\lib\net461\Microsoft.EyeGaze.Sensors.dll</HintPath>
+    <Reference Include="Microsoft.HandsFree.Sensors, Version=1.1.2074.0, Culture=neutral, processorArchitecture=AMD64">
+      <HintPath>..\packages\SightSignAPI.1.1.2074\lib\net461\Microsoft.HandsFree.Sensors.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Microsoft.EyeGaze.Settings, Version=2016.8.24.1555, Culture=neutral, processorArchitecture=AMD64">
-      <HintPath>..\packages\Microsoft.EyeGaze.Mouse.2016.8.24.1555\lib\net461\Microsoft.EyeGaze.Settings.dll</HintPath>
+    <Reference Include="Microsoft.HandsFree.Settings, Version=1.1.2074.0, Culture=neutral, processorArchitecture=AMD64">
+      <HintPath>..\packages\SightSignAPI.1.1.2074\lib\net461\Microsoft.HandsFree.Settings.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Microsoft.EyeGaze.Win32, Version=2016.8.24.1555, Culture=neutral, processorArchitecture=AMD64">
-      <HintPath>..\packages\Microsoft.EyeGaze.Mouse.2016.8.24.1555\lib\net461\Microsoft.EyeGaze.Win32.dll</HintPath>
+    <Reference Include="Microsoft.HandsFree.Win32, Version=1.1.2074.0, Culture=neutral, processorArchitecture=AMD64">
+      <HintPath>..\packages\SightSignAPI.1.1.2074\lib\net461\Microsoft.HandsFree.Win32.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.Robotics.Brief, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
@@ -89,11 +89,11 @@
       <RequiredTargetFramework>4.0</RequiredTargetFramework>
     </Reference>
     <Reference Include="Tobii.EyeX.Client.Net20, Version=1.8.486.0, Culture=neutral, PublicKeyToken=70326046dcdce6cb, processorArchitecture=AMD64">
-      <HintPath>..\packages\Microsoft.EyeGaze.Mouse.2016.8.24.1555\lib\net461\Tobii.EyeX.Client.Net20.dll</HintPath>
+      <HintPath>..\packages\SightSignAPI.1.1.2074\lib\net461\Tobii.EyeX.Client.Net20.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Tobii.Gaze.Core.Net, Version=2.0.3.182, Culture=neutral, PublicKeyToken=70326046dcdce6cb, processorArchitecture=AMD64">
-      <HintPath>..\packages\Microsoft.EyeGaze.Mouse.2016.8.24.1555\lib\net461\Tobii.Gaze.Core.Net.dll</HintPath>
+      <HintPath>..\packages\SightSignAPI.1.1.2074\lib\net461\Tobii.Gaze.Core.Net.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="WindowsBase" />
@@ -149,6 +149,24 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <Content Include="msvcp110.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="msvcr110.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="myGazeAPI64.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Tobii.EyeX.Client.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TobiiGazeCore64.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="vccorlib110.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -178,24 +196,6 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="SightSign.ico" />
-    <Content Include="msvcp110.dll">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="msvcr110.dll">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="myGazeAPI64.dll">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Tobii.EyeX.Client.dll">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="TobiiGazeCore64.dll">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="vccorlib110.dll">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -10,7 +10,7 @@ using System.Windows.Ink;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Threading;
-using Microsoft.EyeGaze.Mouse;
+using Microsoft.HandsFree.Mouse;
 using Microsoft.Win32;
 
 namespace SightSign
