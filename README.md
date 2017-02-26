@@ -22,7 +22,7 @@ To replicate our experiment
 
 1. Clone the repo
 2. Upload firmware to uArm via the Arduino IDE
-3. Mount the arm (we mounded ours to be more like a [SCARA robot](robot/readme.md#scara-mode))
+3. Mount the arm (we mounted ours to be more like a [SCARA robot](robot/readme.md#scara-mode))
 4. Connect the arm and the Tobii sensor
 5. Calibrate your Tobii sensor
 5. Open the solution in Visual Studio and run
