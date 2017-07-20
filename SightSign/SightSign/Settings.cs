@@ -9,6 +9,7 @@ namespace SightSign
     public class Settings : INotifyPropertyChanged
     {
         private RobotArm _robotArm;
+        private string _robotType;
         private bool _robotControl;
         private Color _backgroundColor;
         private Color _buttonBackgroundColor;
@@ -41,6 +42,8 @@ namespace SightSign
 
         private void LoadSettings()
         {
+            RobotType = Settings1.Default.RobotType;
+
             RobotControl = Settings1.Default.RobotControl;
 
             var backgroundColorSetting = Settings1.Default.BackgroundColor;
@@ -136,6 +139,22 @@ namespace SightSign
                 {
                     _fadedInkColor = value;
                     OnPropertyChanged("FadedInkColor");
+                }
+            }
+        }
+
+        public string RobotType
+        {
+            get
+            {
+                return _robotType;
+            }
+            set
+            {
+                if (_robotType != value)
+                {
+                    _robotType = value;
+                    OnPropertyChanged("RobotType");
                 }
             }
         }

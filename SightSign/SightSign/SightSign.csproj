@@ -96,6 +96,9 @@
       <HintPath>..\packages\SightSignAPI.1.1.2074\lib\net461\Tobii.Gaze.Core.Net.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="uArmSwift">
+      <HintPath>..\..\external\uArmSwift.dll</HintPath>
+    </Reference>
     <Reference Include="WindowsBase" />
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
@@ -117,7 +120,8 @@
     <Compile Include="SettingsWindow.xaml.cs">
       <DependentUpon>SettingsWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="UArm.cs" />
+    <Compile Include="UArmSwift.cs" />
+    <Compile Include="UArmMetal.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -192,7 +196,9 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Resource Include="SightSign.ico" />

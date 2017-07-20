@@ -43,14 +43,14 @@ namespace SightSign
             var xScreen = SystemParameters.PrimaryScreenWidth;
             var yScreen = SystemParameters.PrimaryScreenHeight;
 
+            _settings = new Settings(RobotArm);
+            DataContext = _settings;
+
             RobotArm = new RobotArm(
                 xScreen / 2.0, 
                 yScreen / 2.0, 
                 Math.Min(xScreen, yScreen) / 2.0, 
-                new UArm());
-
-            _settings = new Settings(RobotArm);
-            DataContext = _settings;
+                _settings.RobotType == "Swift" ? ((IArm)new UArmSwiftPro()) : ((IArm)new UArmMetal()));
 
             Background = new SolidColorBrush(_settings.BackgroundColor);
 
