@@ -7,39 +7,15 @@ using Microsoft.Robotics.Tests.Reflecta;
 
 namespace SightSign
 {
-    public class UArm : IArm
+    public class UArmMetal : IArm
     {
         private readonly string _port;
         private ReflectaClient _reflecta;
         private readonly Compiler _compiler = new Compiler();
 
-        public UArm()
+        public UArmMetal()
         {
-            var searcher = new ManagementObjectSearcher("root\\CIMV2", "SELECT * FROM Win32_PnPEntity");
-
-            var comPorts = new Dictionary<string, PortDetails>();
-            foreach (var queryObj in searcher.Get())
-            {
-                if (queryObj["Name"] == null || !queryObj["Name"].ToString().Contains("(COM")) continue;
-
-                var portDetails = new PortDetails
-                {
-                    Name = (string)queryObj["Name"],
-                    PnPId = (string)queryObj["PnPDeviceID"],
-                    Manufacturer = (string)queryObj["Manufacturer"]
-                };
-
-                comPorts.Add(portDetails.ComName, portDetails);
-            }
-
-            foreach (var port in comPorts.Values)
-            {
-                // uArm using generic windows 10 serial driver
-                if (port.PnPId.Contains("FTDIBUS\\VID_0403+PID_6001"))
-                {
-                    _port = port.ComName;
-                }
-            }
+            _port = PortDetails.FindPort();
         }
 
         private void Exec(int wait, string brief)

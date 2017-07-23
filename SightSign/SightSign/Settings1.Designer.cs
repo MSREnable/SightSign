@@ -145,6 +145,18 @@ namespace SightSign {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Swift")]
+        public string RobotType {
+            get {
+                return (string)this["RobotType"];
+            }
+            set {
+                this["RobotType"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("com7")]
         public string RobotComPort {
             get {

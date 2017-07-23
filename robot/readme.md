@@ -1,13 +1,22 @@
 # SightSign Robot
 
-The arm being used is the [uArm Metal from uFactory](https://www.ufactory.cc/en/uarm_metal/). We've replaced the firmware with our own.
+The arm being used is the [uArm Metal from uFactory](http://www.ufactory.cc/#/en/uarm1). We've replaced the firmware with our own.
 
-# Installation
+If instead you are using the newer [uArm Swift](http://www.ufactory.cc/#/en/uarmswift), you can ignore the firmware and the discussion of SCARA mode.
+We use the built-in firmware for this arm and it is *very* precise; obviating the need for SCARA mode. The control class [is from here](http://github.com/ashleyf/uarm/tree/master/swift).
+
+# uArm Metal Installation
 
 * Load [`firmware.ino`](robot/firmware/firmware.ino) into the [Arduino IDE](https://www.arduino.cc/en/Main/Software)
 * Manually drop the [Brief and Reflecta](https://github.com/AshleyF/brief/tree/gh-pages/embedded/Firmware/libraries) libraries into the `Documents/Arduino/libraries` directory
 * Compile and upload the sketch
 * Note: There is no dependency on [UArmForArduino](https://github.com/uArm-Developer/UArmForArduino)
+
+# uArm Swift Installation
+
+This arm should work out of the box. No special firmware. No SCARA mode.
+
+* Set `RobotType` in `App.config` to `Swift`
 
 # uArm Firmware
 

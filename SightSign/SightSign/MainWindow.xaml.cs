@@ -47,7 +47,7 @@ namespace SightSign
                 xScreen / 2.0, 
                 yScreen / 2.0, 
                 Math.Min(xScreen, yScreen) / 2.0, 
-                new UArm());
+                Settings1.Default.RobotType == "Swift" ? ((IArm)new UArmSwiftPro()) : ((IArm)new UArmMetal()));
 
             _settings = new Settings(RobotArm);
             DataContext = _settings;

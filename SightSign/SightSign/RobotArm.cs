@@ -42,7 +42,6 @@ namespace SightSign
             _yShift = yShift;
             _minDimensionHalf = minDimensionHalf;
             _arm = arm;
-            Connect();
         }
 
         public void Connect()
