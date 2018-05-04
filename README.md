@@ -1,6 +1,6 @@
 # Sight Sign
 
-Sight Sign, a Microsoft Garage project, showcases the power of eye gaze input, inking with Windows, and robotics.  When paired with the uArm (https://www.ufactory.cc/) the robot will sign whatever has been inked into the application.  
+Sight Sign, showcases the power of eye gaze input, inking with Windows, and robotics.  When paired with the uArm (https://www.ufactory.cc/) the robot will sign whatever has been inked into the application.  
 
 👁+🐙+🤖=🎉 
 
@@ -58,6 +58,3 @@ Information regarding privacy can be found in the [privacy.md](docs/privacy.md).
 # License
 
 This source code is provided under the [MIT License](LICENSE).
-
----
-The Microsoft Garage is an outlet for experimental projects for you to try. Learn more at [http://garage.microsoft.com](http://microsoft.com/garage). 
